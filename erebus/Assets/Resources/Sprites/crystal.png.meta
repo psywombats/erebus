@@ -1,13 +1,21 @@
 fileFormatVersion: 2
 guid: 277934819742fdb44902f65b5c6c9312
 TextureImporter:
-  fileIDToRecycleName:
-    21300000: crystal_0
-    21300002: crystal_1
-    21300004: crystal_2
-    21300006: crystal_3
+  internalIDToNameTable:
+  - first:
+      213: 21300000
+    second: crystal_0
+  - first:
+      213: 21300002
+    second: crystal_1
+  - first:
+      213: 21300004
+    second: crystal_2
+  - first:
+      213: 21300006
+    second: crystal_3
   externalObjects: {}
-  serializedVersion: 7
+  serializedVersion: 10
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -103,6 +111,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 406fb8dcfad27f44bad940334cf3152c
+      internalID: 21300000
       vertices: []
       indices: 
       edges: []
@@ -123,6 +132,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 9f1014c8e25f64148adbbe4586a9c85d
+      internalID: 21300002
       vertices: []
       indices: 
       edges: []
@@ -143,6 +153,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 5465cb7b938451746bae94016a50e207
+      internalID: 21300004
       vertices: []
       indices: 
       edges: []
@@ -163,6 +174,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: ac0ee34ce17670b47810dcac6ca640b9
+      internalID: 21300006
       vertices: []
       indices: 
       edges: []
@@ -171,10 +183,12 @@ TextureImporter:
     physicsShape: []
     bones: []
     spriteID: 
+    internalID: 0
     vertices: []
     indices: 
     edges: []
     weights: []
+    secondaryTextures: []
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

@@ -1,13 +1,21 @@
 fileFormatVersion: 2
 guid: da2ca0851ba5763449ab8594cbad0c7a
 TextureImporter:
-  fileIDToRecycleName:
-    21300000: textbox_advance_0
-    21300002: textbox_advance_1
-    21300004: textbox_advance_2
-    21300006: textbox_advance_3
+  internalIDToNameTable:
+  - first:
+      213: 21300000
+    second: textbox_advance_0
+  - first:
+      213: 21300002
+    second: textbox_advance_1
+  - first:
+      213: 21300004
+    second: textbox_advance_2
+  - first:
+      213: 21300006
+    second: textbox_advance_3
   externalObjects: {}
-  serializedVersion: 7
+  serializedVersion: 10
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -103,6 +111,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 709a592e3933dfe40a69ea6157252014
+      internalID: 21300000
       vertices: []
       indices: 
       edges: []
@@ -123,6 +132,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 9054802601f39ff4dae9ccf9cb446ae0
+      internalID: 21300002
       vertices: []
       indices: 
       edges: []
@@ -143,6 +153,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 4aa49ede93448da4ab3ab42956332e12
+      internalID: 21300004
       vertices: []
       indices: 
       edges: []
@@ -163,6 +174,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 15b3115629ee83d4b82e40c00700142e
+      internalID: 21300006
       vertices: []
       indices: 
       edges: []
@@ -171,10 +183,12 @@ TextureImporter:
     physicsShape: []
     bones: []
     spriteID: 23b49a1773201dd4ea0b0eaea6f7c8a8
+    internalID: 0
     vertices: []
     indices: 
     edges: []
     weights: []
+    secondaryTextures: []
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
