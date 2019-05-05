@@ -1,10 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class MapCamera3D : MapCamera {
 
-    public bool FixedZ;
+    public bool fixedZ;
+    public bool constrain;
+    public Vector3 minValues = new Vector3(0, 0, 0);
+    public Vector3 maxValues = new Vector3(100, 100, 0);
 
     private float lastFixedZ;
 
@@ -18,8 +19,14 @@ public class MapCamera3D : MapCamera {
 
     public override void ManualUpdate() {
         base.ManualUpdate();
-        if (FixedZ) {
+        if (fixedZ) {
             transform.position = new Vector3(transform.position.x, transform.position.y, lastFixedZ);
+        }
+        if (constrain) {
+            transform.position = new Vector3(
+                Mathf.Clamp(transform.position.x, minValues.x, maxValues.x),
+                Mathf.Clamp(transform.position.y, minValues.y, maxValues.y),
+                transform.position.z);
         }
     }
 }

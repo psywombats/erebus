@@ -6,6 +6,8 @@ using UnityEngine;
 [RequireComponent(typeof(CharaEvent))]
 public class AvatarEvent : MonoBehaviour, InputListener, MemoryPopulater {
 
+    private bool wantsToTrack;
+
     private int pauseCount;
     public bool InputPaused {
         get {
@@ -19,6 +21,10 @@ public class AvatarEvent : MonoBehaviour, InputListener, MemoryPopulater {
         Global.Instance().Maps.avatar = this;
         Global.Instance().Input.PushListener(this);
         pauseCount = 0;
+    }
+
+    public virtual void Update() {
+        wantsToTrack = false;
     }
 
     public bool OnCommand(InputManager.Command command, InputManager.Event eventType) {
@@ -80,8 +86,12 @@ public class AvatarEvent : MonoBehaviour, InputListener, MemoryPopulater {
         pauseCount -= 1;
     }
 
+    public bool WantsToTrack() {
+        return wantsToTrack;
+    }
+
     private void Interact() {
-        Vector2Int target = GetComponent<MapEvent>().position + GetComponent<CharaEvent>().facing.XY2D();
+        Vector2Int target = GetComponent<MapEvent>().position + VectorForDir(GetComponent<CharaEvent>().facing);
         List<MapEvent> targetEvents = GetComponent<MapEvent>().parent.GetEventsAt(target);
         foreach (MapEvent tryTarget in targetEvents) {
             if (tryTarget.switchEnabled && !tryTarget.IsPassableBy(parent)) {
@@ -102,7 +112,7 @@ public class AvatarEvent : MonoBehaviour, InputListener, MemoryPopulater {
 
     private bool TryStep(OrthoDir dir) {
         Vector2Int vectors = GetComponent<MapEvent>().position;
-        Vector2Int vsd = dir.XY2D();
+        Vector2Int vsd = VectorForDir(dir);
         Vector2Int target = vectors + vsd;
         GetComponent<CharaEvent>().facing = dir;
         List<MapEvent> targetEvents = GetComponent<MapEvent>().parent.GetEventsAt(target);
@@ -117,6 +127,7 @@ public class AvatarEvent : MonoBehaviour, InputListener, MemoryPopulater {
         }
 
         if (passable) {
+            wantsToTrack = true;
             StartCoroutine(CoUtils.RunWithCallback(GetComponent<MapEvent>().StepRoutine(dir), () => {
                 foreach (MapEvent targetEvent in toCollide) {
                     if (targetEvent.switchEnabled) {
@@ -133,6 +144,10 @@ public class AvatarEvent : MonoBehaviour, InputListener, MemoryPopulater {
         }
         
         return true;
+    }
+
+    protected virtual Vector2Int VectorForDir(OrthoDir dir) {
+        return dir.XY2D();
     }
 
     private void ShowMenu() {

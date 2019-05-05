@@ -73,6 +73,14 @@ public class CharaEvent : MonoBehaviour {
         }
     }
 
+    private TacticsTerrainMesh _terrain;
+    public TacticsTerrainMesh terrain {
+        get {
+            if (_terrain == null) _terrain = GetComponent<MapEvent>().parent.terrain;
+            return _terrain;
+        }
+    }
+
     private SpriteRenderer[] renderers {
         get { return new SpriteRenderer[] { mainLayer, armsLayer, itemLayer }; }
     }
@@ -99,10 +107,9 @@ public class CharaEvent : MonoBehaviour {
         
         bool steppingThisFrame = IsSteppingThisFrame();
         stepping = steppingThisFrame || wasSteppingLastFrame;
-        if (steppingThisFrame != wasSteppingLastFrame) {
+        if (!steppingThisFrame && !wasSteppingLastFrame) {
             moveTime = 0.0f;
-        }
-        if (stepping) {
+        } else {
             moveTime += Time.deltaTime;
         }
         wasSteppingLastFrame = steppingThisFrame;
@@ -143,6 +150,17 @@ public class CharaEvent : MonoBehaviour {
             Debug.LogError(this + " doesn't contain frame " + name);
         }
         return sprites[name];
+    }
+
+    public bool CanCrossTileGradient(Vector2Int from, Vector2Int to) {
+        float fromHeight = terrain.HeightAt(from);
+        float toHeight = GetComponent<MapEvent>().parent.terrain.HeightAt(to);
+        return Mathf.Abs(fromHeight - toHeight) < 1.0f;
+        //if (fromHeight < toHeight) {
+        //    return toHeight - fromHeight <= unit.GetMaxAscent();
+        //} else {
+        //    return fromHeight - toHeight <= unit.GetMaxDescent();
+        //}
     }
 
     private void CopyShaderValues() {
@@ -232,7 +250,8 @@ public class CharaEvent : MonoBehaviour {
     private bool IsSteppingThisFrame() {
         Vector2 position = transform.position;
         Vector2 delta = position - lastPosition;
-        return alwaysAnimates || (delta.sqrMagnitude > 0 && delta.sqrMagnitude < Map.TileSizePx) || parent.tracking;
+        return alwaysAnimates || (delta.sqrMagnitude > 0 && delta.sqrMagnitude < Map.TileSizePx) || parent.tracking ||
+            (GetComponent<AvatarEvent>() && GetComponent<AvatarEvent>().WantsToTrack());
     }
 
     private void LoadSpritesheetData() {

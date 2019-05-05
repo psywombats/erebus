@@ -69,7 +69,7 @@ public class BattleUnit {
 
     // select + execute a skill
     public IEnumerator PlayNextActionRoutine(Result<Effector> effectResult) {
-        int energyExpended = 0;
+        //int energyExpended = 0;
 
         Result<Skill> skillResult = new Result<Skill>();
         yield return SelectSkillRoutine(skillResult);

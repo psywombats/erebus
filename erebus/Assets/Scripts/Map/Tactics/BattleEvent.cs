@@ -49,14 +49,4 @@ public class BattleEvent : MonoBehaviour {
     public IEnumerator PostTurnRoutine() {
         yield return GetComponent<CharaEvent>().DesaturateRoutine(0.0f);
     }
-
-    public bool CanCrossTileGradient(Vector2Int from, Vector2Int to) {
-        float fromHeight = terrain.HeightAt(from);
-        float toHeight = GetComponent<MapEvent>().parent.terrain.HeightAt(to);
-        if (fromHeight < toHeight) {
-            return toHeight - fromHeight <= unit.GetMaxAscent();
-        } else {
-            return fromHeight - toHeight <= unit.GetMaxDescent();
-        }
-    }
 }

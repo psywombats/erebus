@@ -58,7 +58,7 @@ public class TacticsTerrainMesh : MonoBehaviour, ISerializationCallbackReceiver 
         tilemap.ClearAllTiles();
         for (int y = 0; y < (size.y < newSize.y ? size.y : newSize.y); y += 1) {
             for (int x = 0; x < (size.x < newSize.x ? size.x : newSize.x); x += 1) {
-                tilemap.SetTile(new Vector3Int(x, y, 0), newTiles[y * size.x + x]);
+                tilemap.SetTile(new Vector3Int(x, y, 0), newTiles[y * (size.x < newSize.x ? size.x : newSize.x) + x]);
             }
         }
         heights = newHeights;

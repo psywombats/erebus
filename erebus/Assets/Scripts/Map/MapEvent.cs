@@ -169,6 +169,12 @@ public abstract class MapEvent : MonoBehaviour {
         if (loc.x < 0 || loc.x >= parent.width || loc.y < 0 || loc.y >= parent.height) {
             return false;
         }
+        CharaEvent chara = GetComponent<CharaEvent>();
+        if (chara != null) {
+            if (!chara.CanCrossTileGradient(position, loc)) {
+                return false;
+            }
+        }
         foreach (Tilemap layer in parent.layers) {
             if (layer.transform.position.z >= parent.objectLayer.transform.position.z && 
                     !parent.IsChipPassableAt(layer, loc)) {
