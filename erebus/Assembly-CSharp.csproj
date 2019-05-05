@@ -106,7 +106,10 @@
     <Compile Include="Assets\Scripts\ImageEffects\FadeoutBehavior.cs" />
     <Compile Include="Assets\Scripts\ImageEffects\GlitchBehavior.cs" />
     <Compile Include="Assets\Scripts\ImageEffects\GlitchImageEffect.cs" />
+    <Compile Include="Assets\Scripts\ImageEffects\LightSoundBehavior.cs" />
     <Compile Include="Assets\Scripts\ImageEffects\SmearBehavior.cs" />
+    <Compile Include="Assets\Scripts\ImageEffects\SoundEmitterBehavior.cs" />
+    <Compile Include="Assets\Scripts\ImageEffects\SpriteSoundBehavior.cs" />
     <Compile Include="Assets\Scripts\ImageEffects\TimeScaleSlider.cs" />
     <Compile Include="Assets\Scripts\IO\AnonymousListener.cs" />
     <Compile Include="Assets\Scripts\IO\InputListener.cs" />
@@ -199,6 +202,7 @@
     <None Include="Assets\Resources\Shaders\Translucent.shader" />
     <None Include="Assets\Resources\Shaders\RotationBlurShader.shader" />
     <None Include="Assets\Resources\Shaders\TransitionUIShader.shader" />
+    <None Include="Assets\Resources\Shaders\GlitchPanelShader.shader" />
     <None Include="Assets\Resources\Shaders\DiffuseDepthSprite.shader" />
     <None Include="Assets\Resources\Shaders\TransitionShader.shader" />
     <None Include="Assets\Demigiant\DOTween\readme.txt" />
