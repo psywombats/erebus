@@ -1,0 +1,7 @@
+CTOE=True
+Help=True
+SnapUV=True
+UseUVs=True
+VMode=1
+PMode=1
+PCol=0,0,0,0

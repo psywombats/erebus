@@ -1,5 +1,16 @@
 ﻿Shader "Erebus/GlitchSpriteShader" {
     Properties {
+    		//_Thickness = Thickness texture (invert normals, bake AO).
+		//_Power = "Sharpness" of translucent glow.
+		//_Distortion = Subsurface distortion, shifts surface normal, effectively a refractive index.
+		//_Scale = Multiplier for translucent glow - should be per-light, really.
+		//_SubColor = Subsurface colour.
+		_Thickness ("Thickness (R)", 2D) = "bump" {}
+		_Power ("Subsurface Power", Float) = 1.0
+		_Distortion ("Subsurface Distortion", Float) = 0.0
+		_Scale ("Subsurface Scale", Float) = 0.5
+		_SubColor ("Subsurface Color", Color) = (1.0, 1.0, 1.0, 1.0)
+    
         [PerRendererData] _MainTex ("Sprite Texture", 2D) = "white" {}
         [PerRendererData] _Color ("Tint", Color) = (1,1,1,1)
         [PerRendererData] _Flash ("Flash", Color) = (1,1,1,0)
@@ -141,7 +152,7 @@
         ZWrite Off
 
         CGPROGRAM
-        #pragma surface surf Lambert vertex:vert nofog nolightmap nodynlightmap keepalpha noinstancing
+        #pragma surface surf Translucent vertex:vert nofog nolightmap nodynlightmap keepalpha noinstancing
         #pragma multi_compile _ PIXELSNAP_ON
         #pragma multi_compile _ ETC1_EXTERNAL_ALPHA
         #include "Glitch.cginc"
@@ -151,6 +162,10 @@
         float _Alpha;
         float _Desaturation;
         fixed4 _Flash;
+        
+        float _Scale, _Power, _Distortion;
+		fixed4 _SubColor;
+		half _Shininess;
 
         struct Input {
             float2 uv_MainTex;
@@ -179,9 +194,40 @@
             float4 desat = float4(avg / 2.0, avg / 2.0, avg / 2.0, c.a);
             o.Albedo = c.rgb * (1.0 - _Desaturation) + desat.rgb * (_Desaturation);
             o.Albedo = o.Albedo * (1.0 - _Flash.a) + _Flash.rgb * _Flash.a;
-            o.Alpha = c.a;
+            o.Alpha = c.a > 0.5 ? 1.0 : 0.0;
             o.Albedo *= o.Alpha;
         }
+        
+        inline fixed4 LightingTranslucent(SurfaceOutput s, fixed3 lightDir, fixed3 viewDir, fixed atten) {		
+			// You can remove these two lines,
+			// to save some instructions. They're just
+			// here for visual fidelity.
+			viewDir = normalize ( viewDir );
+			lightDir = normalize ( lightDir );
+ 
+			// Translucency.
+			half3 transLightDir = lightDir + s.Normal * _Distortion;
+			float transDot = pow ( max (0, dot ( viewDir, -transLightDir ) ), _Power ) * _Scale;
+			fixed3 transLight = (atten * 2) * ( transDot ) * s.Alpha * _SubColor.rgb;
+            if (transLight[0] > 1.0) transLight[0] = 1.0;
+            if (transLight[1] > 1.0) transLight[1] = 1.0;
+            if (transLight[2] > 1.0) transLight[2] = 1.0;
+			fixed3 transAlbedo = s.Albedo * _LightColor0.rgb * transLight;
+ 
+			// Regular BlinnPhong.
+			half3 h = normalize (lightDir + viewDir);
+			fixed diff = max (0, dot (s.Normal, lightDir));
+			float nh = max (0, dot (s.Normal, h));
+			float spec = pow (nh, s.Specular*128.0) * s.Gloss;
+			fixed3 diffAlbedo = (s.Albedo * _LightColor0.rgb * diff + _LightColor0.rgb * spec) * (atten * 2);
+ 
+			// Add the two together.
+			fixed4 c;
+			c.rgb = diffAlbedo + transAlbedo;
+			c.a = s.Alpha;
+			return c;
+		}
+        
         ENDCG
     }
 

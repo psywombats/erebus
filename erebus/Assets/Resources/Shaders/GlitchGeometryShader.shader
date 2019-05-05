@@ -129,7 +129,7 @@
         Tags {
             "Queue"="Geometry"
             "IgnoreProjector"="True"
-            "RenderType"="TransparentCutout"
+            "RenderType"="Cutout"
             "PreviewType"="Plane"
             "CanUseSpriteAtlas"="True"
         }

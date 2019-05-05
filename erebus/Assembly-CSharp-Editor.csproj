@@ -99,8 +99,16 @@
     <Compile Include="Assets\Editor\Importers\SpriteImporter.cs" />
     <Compile Include="Assets\Editor\Importers\TileImporter.cs" />
     <Compile Include="Assets\Editor\MathHelper3D.cs" />
+    <Compile Include="Assets\Editor\MeshEdit\_EditorCustomMesh.cs" />
+    <Compile Include="Assets\Editor\MeshEdit\_EditorMeshInterface.cs" />
+    <Compile Include="Assets\Editor\MeshEdit\_EditorMeshTools.cs" />
+    <Compile Include="Assets\Editor\MeshEdit\_TilesetImporter.cs" />
+    <Compile Include="Assets\Editor\MeshEdit\_WindowTilesetManager.cs" />
     <Compile Include="Assets\Editor\PolymorphicFieldUtility.cs" />
     <Compile Include="Assets\Editor\TerrainQuad.cs" />
+    <None Include="Assets\Editor\MeshEdit\Mesh Edit Settings.txt" />
+    <None Include="Assets\Editor\EditorResources\Tilesets\CloudyTemple.xml" />
+    <None Include="Assets\Editor\EditorResources\Tilesets\New Tileset.xml" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>C:/Users/aking_2/erebus/erebus/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>

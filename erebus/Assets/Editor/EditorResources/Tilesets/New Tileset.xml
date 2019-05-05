@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<Tileset xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <tilesetMappedPoints />
+  <editorMappedPoints />
+  <animationLength>
+    <int>0</int>
+  </animationLength>
+  <tilesetName>New Tileset</tilesetName>
+  <tileWidth>16</tileWidth>
+  <tileHeight>16</tileHeight>
+  <tileOutline>1</tileOutline>
+  <pageWidth>18</pageWidth>
+  <pageHeight>18</pageHeight>
+  <editorTilesetWidth>16</editorTilesetWidth>
+  <editorTilesetHeight>16</editorTilesetHeight>
+  <tilePadding>0</tilePadding>
+  <textureAssets>
+    <string>Assets/Resources/Textures/Ceilings/ceil_debug.png</string>
+  </textureAssets>
+  <animationAssets />
+</Tileset>
