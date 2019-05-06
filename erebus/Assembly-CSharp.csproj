@@ -92,6 +92,7 @@
     <Compile Include="Assets\Scripts\Audio\AudioManager.cs" />
     <Compile Include="Assets\Scripts\Audio\SFX.cs" />
     <Compile Include="Assets\Scripts\Audio\WaveSource.cs" />
+    <Compile Include="Assets\Scripts\Data\AlphaSet.cs" />
     <Compile Include="Assets\Scripts\Data\AutoExpandingScriptableObject.cs" />
     <Compile Include="Assets\Scripts\Data\BGMIndexData.cs" />
     <Compile Include="Assets\Scripts\Data\FadeIndexData.cs" />
@@ -101,6 +102,7 @@
     <Compile Include="Assets\Scripts\Data\SoundEffectIndexData.cs" />
     <Compile Include="Assets\Scripts\Data\TransitionIndexData.cs" />
     <Compile Include="Assets\Scripts\Global.cs" />
+    <Compile Include="Assets\Scripts\ImageEffects\AlphaPanelBehavior.cs" />
     <Compile Include="Assets\Scripts\ImageEffects\DurationEffectBehavior.cs" />
     <Compile Include="Assets\Scripts\ImageEffects\FadeImageEffect.cs" />
     <Compile Include="Assets\Scripts\ImageEffects\FadeoutBehavior.cs" />

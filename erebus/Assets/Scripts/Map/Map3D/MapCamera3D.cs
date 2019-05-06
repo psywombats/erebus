@@ -11,6 +11,7 @@ public class MapCamera3D : MapCamera {
 
     public void Awake() {
         lastFixedZ = transform.position.z;
+        GetComponent<Camera>().transparencySortMode = TransparencySortMode.Orthographic;
     }
 
     public void LateUpdate() {
