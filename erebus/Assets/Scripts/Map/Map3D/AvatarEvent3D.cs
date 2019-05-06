@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AvatarEvent3D : AvatarEvent {
 
-    public void Update() {
+    public override void Update() {
         base.Update();
         Global.Instance().Maps.camera.ManualUpdate();
     }

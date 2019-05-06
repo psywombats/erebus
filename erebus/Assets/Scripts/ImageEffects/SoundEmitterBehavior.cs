@@ -3,10 +3,14 @@ using System.Collections;
 
 public abstract class SoundEmitterBehavior : MonoBehaviour {
 
+    public bool useAlpha = true;
+    public bool useColor = true;
+    public bool swapBands = false;
+
     public abstract float GetIntensity();
     public abstract Color GetHue();
-    public abstract void SetIntensity(float f );
-    public abstract void SetHue(Color c );
+    public abstract void SetIntensity(float f);
+    public abstract void SetHue(Color c);
 
     private float baseIntensity;
     private Color baseHue;
@@ -19,12 +23,21 @@ public abstract class SoundEmitterBehavior : MonoBehaviour {
     public void Update() {
         float band1 = Global.Instance().Audio.GetWaveSource().GetLowBand();
         float band2 = Global.Instance().Audio.GetWaveSource().GetHighBand();
+        if (swapBands) {
+            float temp = band1;
+            band1 = band2;
+            band2 = temp;
+        }
 
-        SetHue(new Color(
-            Rebase(baseHue.r, band2),
-            Rebase(baseHue.g, 1.0f - band2),
-            baseHue.b));
-        SetIntensity(Rebase(baseIntensity, band1, 0.9f));
+        if (useColor) {
+            SetHue(new Color(
+                Rebase(baseHue.r, band2),
+                Rebase(baseHue.g, 1.0f - band2),
+                baseHue.b));
+        }
+        if (useAlpha) {
+            SetIntensity(Rebase(baseIntensity, band1, 0.9f));
+        }
     }
 
     private float Rebase(float baseVal, float adjVal, float pct = 0.5f) {
