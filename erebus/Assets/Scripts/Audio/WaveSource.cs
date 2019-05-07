@@ -94,10 +94,12 @@ public class WaveSource : MonoBehaviour {
     }
 
     public float GetLowBand() {
+        if (bands == null) return 0.0f;
         return bands[1] * 3.0f;
     }
 
     public float GetHighBand() {
+        if (bands == null) return 0.0f;
         return bands[6] / 1.5f;
     }
 }
