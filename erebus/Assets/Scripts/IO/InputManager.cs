@@ -50,7 +50,7 @@ public class InputManager : MonoBehaviour {
         keybinds[Command.Cancel] = new List<KeyCode>(new[] { KeyCode.Escape, KeyCode.B, KeyCode.X });
         keybinds[Command.Debug] = new List<KeyCode>(new[] { KeyCode.F9 });
         keybinds[Command.Auto] = new List<KeyCode>(new[] { KeyCode.A });
-        keybinds[Command.Menu] = new List<KeyCode>(new[] { KeyCode.Escape, KeyCode.C, KeyCode.Backspace });
+        keybinds[Command.Menu] = new List<KeyCode>(new[] { KeyCode.Escape, KeyCode.C, KeyCode.Backspace, KeyCode.Tab });
         keybinds[Command.Skip] = new List<KeyCode>(new[] { KeyCode.S });
         keybinds[Command.Save] = new List<KeyCode>();
         keybinds[Command.Load] = new List<KeyCode>();

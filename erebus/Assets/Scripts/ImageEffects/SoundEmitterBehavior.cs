@@ -6,6 +6,7 @@ public abstract class SoundEmitterBehavior : MonoBehaviour {
     public bool useAlpha = true;
     public bool useColor = true;
     public bool swapBands = false;
+    public bool invert = false;
 
     public abstract float GetIntensity();
     public abstract Color GetHue();
@@ -23,6 +24,12 @@ public abstract class SoundEmitterBehavior : MonoBehaviour {
     public void Update() {
         float band1 = Global.Instance().Audio.GetWaveSource().GetLowBand();
         float band2 = Global.Instance().Audio.GetWaveSource().GetHighBand();
+
+        if (invert) {
+            band1 = 1.0f - band1;
+            band2 = 1.0f - band2;
+        }
+
         if (swapBands) {
             float temp = band1;
             band1 = band2;

@@ -88,7 +88,9 @@
     <Compile Include="Assets\Scripts\Animation\CharaAnimationTarget.cs" />
     <Compile Include="Assets\Scripts\Animation\ItemMode.cs" />
     <Compile Include="Assets\Scripts\Animation\LuaAnimation.cs" />
+    <Compile Include="Assets\Scripts\Animation\Oscillator.cs" />
     <Compile Include="Assets\Scripts\Animation\SimpleSpriteAnimator.cs" />
+    <Compile Include="Assets\Scripts\Animation\SubJitter.cs" />
     <Compile Include="Assets\Scripts\Audio\AudioManager.cs" />
     <Compile Include="Assets\Scripts\Audio\SFX.cs" />
     <Compile Include="Assets\Scripts\Audio\WaveSource.cs" />
@@ -158,6 +160,7 @@
     <Compile Include="Assets\Scripts\Map\Tactics\DuelMap.cs" />
     <Compile Include="Assets\Scripts\Map\Tactics\SelectionGrid.cs" />
     <Compile Include="Assets\Scripts\Map\Tactics\TacticsCam.cs" />
+    <Compile Include="Assets\Scripts\Phune\PhuneUI.cs" />
     <Compile Include="Assets\Scripts\RPG\ActorScriptableObject.cs" />
     <Compile Include="Assets\Scripts\RPG\AIController.cs" />
     <Compile Include="Assets\Scripts\RPG\Alignment.cs" />
@@ -206,6 +209,7 @@
     <None Include="Assets\Resources\Shaders\RotationBlurShader.shader" />
     <None Include="Assets\Resources\Shaders\TransitionUIShader.shader" />
     <None Include="Assets\Resources\Shaders\GlitchPanelShader.shader" />
+    <None Include="Assets\Resources\Shaders\AdditiveSprite.shader" />
     <None Include="Assets\Resources\Shaders\DiffuseDepthSprite.shader" />
     <None Include="Assets\Resources\Shaders\TransitionShader.shader" />
     <None Include="Assets\Demigiant\DOTween\readme.txt" />
