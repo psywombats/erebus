@@ -160,6 +160,10 @@
     <Compile Include="Assets\Scripts\Map\Tactics\DuelMap.cs" />
     <Compile Include="Assets\Scripts\Map\Tactics\SelectionGrid.cs" />
     <Compile Include="Assets\Scripts\Map\Tactics\TacticsCam.cs" />
+    <Compile Include="Assets\Scripts\Phune\PhuneCell.cs" />
+    <Compile Include="Assets\Scripts\Phune\PhuneEntryCell.cs" />
+    <Compile Include="Assets\Scripts\Phune\PhuneHeaderCell.cs" />
+    <Compile Include="Assets\Scripts\Phune\PhuneMessageCell.cs" />
     <Compile Include="Assets\Scripts\Phune\PhuneUI.cs" />
     <Compile Include="Assets\Scripts\RPG\ActorScriptableObject.cs" />
     <Compile Include="Assets\Scripts\RPG\AIController.cs" />
