@@ -14,4 +14,8 @@ public abstract class PhuneCell : MonoBehaviour {
         chevronOn.enabled = on;
         chevronOff.enabled = !on;
     }
+
+    public virtual void Execute() {
+
+    }
 }

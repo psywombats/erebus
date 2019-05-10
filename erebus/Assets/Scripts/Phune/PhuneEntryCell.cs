@@ -14,4 +14,9 @@ public class PhuneEntryCell : PhuneCell {
         this.selectAction = selectAction;
         this.text.text = text;
     }
+
+    public override void Execute() {
+        base.Execute();
+        selectAction();
+    }
 }

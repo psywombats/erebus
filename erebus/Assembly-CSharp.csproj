@@ -165,6 +165,7 @@
     <Compile Include="Assets\Scripts\Phune\PhuneHeaderCell.cs" />
     <Compile Include="Assets\Scripts\Phune\PhuneMessageCell.cs" />
     <Compile Include="Assets\Scripts\Phune\PhuneUI.cs" />
+    <Compile Include="Assets\Scripts\Phune\TxtUI.cs" />
     <Compile Include="Assets\Scripts\RPG\ActorScriptableObject.cs" />
     <Compile Include="Assets\Scripts\RPG\AIController.cs" />
     <Compile Include="Assets\Scripts\RPG\Alignment.cs" />

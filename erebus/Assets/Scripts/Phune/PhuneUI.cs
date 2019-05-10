@@ -6,20 +6,30 @@ using System;
 
 public class PhuneUI : MonoBehaviour, InputListener {
 
+    private const float subsOffset = 300f;
+    private const float subsDuration = 1.2f;
+
     public GameObject attachPoint;
     public Vector3 appearOffset;
     public float snapTime = 0.2f;
+    public GameObject standardContent;
+    public GameObject subContent;
     [Space]
     public PhuneHeaderCell headerPrefab;
     public PhuneEntryCell entryPrefab;
     public PhuneMessageCell textPrefab;
+    [Space]
+    public TxtUI uiText;
 
     private Vector3 originalPosition;
     private bool shown = true;
+    private bool subselectionMode;
 
     private Dictionary<PhuneHeaderCell, List<PhuneEntryCell>> entries;
     private List<PhuneCell> allCells;
     private PhuneCell selection;
+
+    private static HashSet<string> readMessageDates = new HashSet<string>();
 
     public void Awake() {
         originalPosition = transform.localPosition;
@@ -39,9 +49,24 @@ public class PhuneUI : MonoBehaviour, InputListener {
                 } else {
                     return false;
                 }
+            } else if (subselectionMode) {
+                switch (command) {
+                    case InputManager.Command.Cancel:
+                    case InputManager.Command.Menu:
+                    case InputManager.Command.Confirm:
+                    case InputManager.Command.Left:
+                        SelectEntry(true);
+                        break;
+                }
             } else {
                 switch (command) {
                     case InputManager.Command.Cancel:
+                        if (!(selection is PhuneHeaderCell)) {
+                            CollapseEntry();
+                        } else {
+                            StartCoroutine(HideRoutine());
+                        }
+                        break;
                     case InputManager.Command.Menu:
                         StartCoroutine(HideRoutine());
                         break;
@@ -52,6 +77,13 @@ public class PhuneUI : MonoBehaviour, InputListener {
                         MoveSelection(1);
                         break; 
                     case InputManager.Command.Right:
+                    case InputManager.Command.Confirm:
+                        if (selection is PhuneHeaderCell) {
+                            CollapseEntry();
+                        } else {
+                            selection.Execute();
+                        }
+                        break;
                     case InputManager.Command.Left:
                         CollapseEntry();
                         break;
@@ -62,12 +94,54 @@ public class PhuneUI : MonoBehaviour, InputListener {
         return true;
     }
 
+    public void SelectEntry(bool deselect = false) {
+        subselectionMode = !deselect;
+        Vector3 to = new Vector3(deselect ? 0 : -subsOffset, 0.0f, 0.0f);
+        var tween = DOTween.To(
+            () => standardContent.GetComponent<RectTransform>().anchoredPosition,
+            (Vector3 newPos) => {
+                Vector3 newTo;
+                if (newPos != to) {
+                    newTo = new Vector3(
+                        newPos.x - (newPos.x % 16),
+                        newPos.y,
+                        newPos.z);
+                } else {
+                    newTo = newPos;
+                }
+                standardContent.GetComponent<RectTransform>().anchoredPosition = newTo;
+                subContent.GetComponent<RectTransform>().anchoredPosition = new Vector3(
+                    newTo.x + subsOffset,
+                    newTo.y,
+                    newTo.z);
+            },
+            to,
+            subsDuration);
+        tween.SetOptions(true);
+        //tween.SetEase(Ease.Linear);
+
+        StartCoroutine(CoUtils.RunWithCallback(CoUtils.RunTween(tween), () => {
+            if (deselect) {
+                uiText.gameObject.SetActive(false);
+            }
+        }));
+    }
+
+    public bool IsMessageRead(string date) {
+        bool result = readMessageDates.Contains(date);
+        return result;
+    }
+
+    public void MarkMessageRead(string date) {
+        readMessageDates.Add(date);
+    }
+
     public IEnumerator ShowRoutine() {
         shown = true;
         Global.Instance().Input.PushListener(this);
         yield return CoUtils.RunTween(DOTween.To(
             () => GetComponent<RectTransform>().localPosition,
-            (Vector3 newPos) => transform.localPosition = newPos,
+            (Vector3 newPos) => GetComponent<RectTransform>().localPosition = newPos,
             originalPosition + appearOffset,
             snapTime)
             .SetOptions(true));
@@ -78,7 +152,7 @@ public class PhuneUI : MonoBehaviour, InputListener {
         Global.Instance().Input.RemoveListener(this);
         yield return CoUtils.RunTween(DOTween.To(
             () => GetComponent<RectTransform>().localPosition,
-            (Vector3 newPos) => transform.localPosition = newPos,
+            (Vector3 newPos) => GetComponent<RectTransform>().localPosition = newPos,
             originalPosition,
             snapTime)
             .SetOptions(true));
@@ -104,6 +178,13 @@ public class PhuneUI : MonoBehaviour, InputListener {
         AddSection("Metasyntactic variables", entries);
         entries.Clear();
 
+        entries.Add(GenerateMessage("12/24/12:00", false, "mumzy", "YO!",
+            "what up"));
+        entries.Add(GenerateMessage("12/23/12:00", true, "mumzy", "re: YO!",
+            "what up!!!!! yo!!!! yabba yabb yaba yeek yekke yabba yaba yeek yekek yaba"));
+        AddSection("Messages", entries);
+        entries.Clear();
+
         selection = allCells[0];
         selection.Populate(true);
         UpdateSelection();
@@ -127,6 +208,13 @@ public class PhuneUI : MonoBehaviour, InputListener {
     private PhuneEntryCell GenerateEntry(string text, Action action) {
         PhuneEntryCell cell = Instantiate(entryPrefab);
         cell.Populate(false, text, action);
+        return cell;
+    }
+
+    private PhuneMessageCell GenerateMessage(string date, bool preread, string from, string subj, string content) {
+        PhuneMessageCell cell = Instantiate(textPrefab);
+        if (preread) readMessageDates.Add(date);
+        cell.Populate(this, false, IsMessageRead(date), date, from, subj, content);
         return cell;
     }
 
