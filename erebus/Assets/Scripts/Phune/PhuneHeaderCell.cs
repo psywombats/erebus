@@ -8,7 +8,7 @@ public class PhuneHeaderCell : PhuneCell {
     public Image chevronDownOn;
     public Image chevronDownOff;
 
-    private bool expanded;
+    public bool expanded;
 
     public void Populate(bool on, bool expanded, string text) {
         Populate(on);
@@ -16,7 +16,7 @@ public class PhuneHeaderCell : PhuneCell {
         this.text.text = text;
     }
 
-    protected override void Populate(bool on) {
+    public override void Populate(bool on) {
         chevronDownOn.enabled = expanded && on;
         chevronDownOff.enabled = expanded && !on;
         chevronOff.enabled = !expanded && !on;

@@ -3,8 +3,7 @@ using System.Collections;
 using UnityEngine.UI;
 
 public class PhuneMessageCell : PhuneEntryCell {
-
-    public Text text;
+    
     public Image readIcon;
     public Image unreadIcon;
 
