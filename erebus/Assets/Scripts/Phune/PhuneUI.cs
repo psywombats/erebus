@@ -172,17 +172,31 @@ public class PhuneUI : MonoBehaviour, InputListener {
         AddSection("Yeeks", entries);
         entries.Clear();
 
-        entries.Add(GenerateEntry("orf", null));
-        entries.Add(GenerateEntry("blorf", null));
-        entries.Add(GenerateEntry("gibborf", null));
-        AddSection("Metasyntactic variables", entries);
-        entries.Clear();
-
-        entries.Add(GenerateMessage("12/24/12:00", false, "mumzy", "YO!",
-            "what up"));
-        entries.Add(GenerateMessage("12/23/12:00", true, "mumzy", "re: YO!",
-            "what up!!!!! yo!!!! yabba yabb yaba yeek yekke yabba yaba yeek yekek yaba"));
-        AddSection("Messages", entries);
+        entries.Add(GenerateMessage("12/28/23:05", true, "VOICE", "remember",
+            "do you remember a place?\n" +
+            "a person, time, space, state of mind?\n" +
+            "a place that is not here, now\n" +
+            "that will never be here, again\n" +
+            "never.\n" +
+            "but instead\n" +
+            "a 'here' and 'now' can be restored\n" +
+            "how\n" +
+            "this is the task at hand, the focus\n" +
+            "focus\n" +
+            "discard the emotion\n" +
+            "jettison the ego\n" +
+            "remove the self\n" +
+            "destroy the conscience\n" +
+            "you are your action and you are your purpose\n" +
+            "perform your mission"
+            ));
+        entries.Add(GenerateMessage("12/23/12:00", false, "news 'MNET'", "Daily Headlines 12/23",
+            "<head><meta content='mobile' http-equiv='x-ua'><meta charset='ascii'><link rel='dns-prefetch' " + 
+            "href='//cdn.optimize/js/131788053' /><link href='//pagead2.syndication' /><link href='//adnetserv' />" +
+            "<link href='//partner.clickthough.paid' /><script story_id='HEADLINE_12_28_LIFE_EXPECTANCY_NEW_HIGHS'" +
+            "crossload='1' storyParam='content' meta='maxSkipCurrentAdAttempts':0,'adLoadTimeout':5000," +
+            "'midrollTemporalSlotName':'mid', sponsored:'1',"));
+        AddSection("Inbox", entries);
         entries.Clear();
 
         selection = allCells[0];
