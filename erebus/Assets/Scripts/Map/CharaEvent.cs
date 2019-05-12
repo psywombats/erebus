@@ -22,6 +22,7 @@ public class CharaEvent : MonoBehaviour {
     private const float JumpStepsPerSecond = 8.0f;
 
     public GameObject doll;
+    public bool useJumps;
     public SpriteRenderer mainLayer;
     public SpriteRenderer armsLayer;
     public SpriteRenderer itemLayer;
@@ -155,7 +156,7 @@ public class CharaEvent : MonoBehaviour {
     public bool CanCrossTileGradient(Vector2Int from, Vector2Int to) {
         float fromHeight = terrain.HeightAt(from);
         float toHeight = GetComponent<MapEvent>().parent.terrain.HeightAt(to);
-        return Mathf.Abs(fromHeight - toHeight) < 1.0f;
+        return Mathf.Abs(fromHeight - toHeight) < 1.0f && toHeight > 0.0f;
         //if (fromHeight < toHeight) {
         //    return toHeight - fromHeight <= unit.GetMaxAscent();
         //} else {
@@ -177,10 +178,9 @@ public class CharaEvent : MonoBehaviour {
         Vector2Int offset = parent.OffsetForTiles(dir);
         Vector3 startPx = parent.positionPx;
         targetPx = parent.TileToWorldCoords(parent.position);
-        if (targetPx.y == startPx.y || GetComponent<MapEvent3D>() == null) {
+        if (targetPx.y == startPx.y || GetComponent<MapEvent3D>() == null || !useJumps) {
             yield return parent.LinearStepRoutine(dir);
         } else if (targetPx.y > startPx.y) {
-            // jump up routine routine
             float duration = (targetPx - startPx).magnitude / parent.CalcTilesPerSecond() / 2.0f * JumpHeightUpMult;
             yield return JumpRoutine(startPx, targetPx, duration);
             overrideBodySprite = FrameBySlot(0, facing.Ordinal()); // "prone" frame

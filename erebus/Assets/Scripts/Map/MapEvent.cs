@@ -142,11 +142,11 @@ public abstract class MapEvent : MonoBehaviour {
     }
 
     public void OnDrawGizmos() {
-        if (Selection.activeGameObject == gameObject) {
-            Gizmos.color = Color.red;
-        } else {
+        //if (Selection.activeGameObject == gameObject) {
+        //    Gizmos.color = Color.red;
+        //} else {
             Gizmos.color = Color.magenta;
-        }
+        //}
         DrawGizmoSelf();
     }
 

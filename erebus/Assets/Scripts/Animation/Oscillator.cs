@@ -24,7 +24,7 @@ public class Oscillator : MonoBehaviour {
     private Vector3 originalScale;
     private float elapsed;
 
-    public void Start() {
+    public virtual void Start() {
         originalPosition = gameObject.transform.localPosition;
         originalScale = gameObject.transform.localScale;
         Reset();
@@ -34,7 +34,17 @@ public class Oscillator : MonoBehaviour {
         Reset();
     }
 
-    public void Update() {
+    public virtual void Update() {
+        float vectorMultiplier = CalcVectorMult();
+
+        if (scaleMode) {
+            gameObject.transform.localScale = originalScale + maxOffset * vectorMultiplier;
+        } else {
+            gameObject.transform.localPosition = originalPosition + maxOffset * vectorMultiplier;
+        }
+    }
+
+    protected float CalcVectorMult() {
         elapsed += Time.deltaTime;
         while (elapsed >= durationSeconds) {
             elapsed -= durationSeconds;
@@ -67,12 +77,7 @@ public class Oscillator : MonoBehaviour {
                 vectorMultiplier = completed;
                 break;
         }
-
-        if (scaleMode) {
-            gameObject.transform.localScale = originalScale + maxOffset * vectorMultiplier;
-        } else {
-            gameObject.transform.localPosition = originalPosition + maxOffset * vectorMultiplier;
-        }
+        return vectorMultiplier;
     }
 
     private void Reset() {

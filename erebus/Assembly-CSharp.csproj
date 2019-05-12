@@ -87,6 +87,7 @@
     <Compile Include="Assets\Scripts\Animation\BattleAnimationPlayer.cs" />
     <Compile Include="Assets\Scripts\Animation\CharaAnimationTarget.cs" />
     <Compile Include="Assets\Scripts\Animation\ItemMode.cs" />
+    <Compile Include="Assets\Scripts\Animation\LightOscillator.cs" />
     <Compile Include="Assets\Scripts\Animation\LuaAnimation.cs" />
     <Compile Include="Assets\Scripts\Animation\Oscillator.cs" />
     <Compile Include="Assets\Scripts\Animation\SimpleSpriteAnimator.cs" />
@@ -142,6 +143,7 @@
     <Compile Include="Assets\Scripts\Map\Map3D\BillboardingSpriteComponent.cs" />
     <Compile Include="Assets\Scripts\Map\Map3D\Cursor.cs" />
     <Compile Include="Assets\Scripts\Map\Map3D\DirectionCursor.cs" />
+    <Compile Include="Assets\Scripts\Map\Map3D\HeroZAlphaBehavior.cs" />
     <Compile Include="Assets\Scripts\Map\Map3D\Map3DHandleExists.cs" />
     <Compile Include="Assets\Scripts\Map\Map3D\MapCamera3D.cs" />
     <Compile Include="Assets\Scripts\Map\Map3D\MapEvent3D.cs" />

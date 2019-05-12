@@ -172,7 +172,7 @@ public class PhuneUI : MonoBehaviour, InputListener {
         AddSection("Yeeks", entries);
         entries.Clear();
 
-        entries.Add(GenerateMessage("12/28/23:05", true, "VOICE", "remember",
+        entries.Add(GenerateMessage("12/29/23:05", true, "VOICE", "remember",
             "do you remember a place?\n" +
             "a person, time, space, state of mind?\n" +
             "a place that is not here, now\n" +
@@ -190,12 +190,28 @@ public class PhuneUI : MonoBehaviour, InputListener {
             "you are your action and you are your purpose\n" +
             "perform your mission"
             ));
-        entries.Add(GenerateMessage("12/23/12:00", false, "news 'MNET'", "Daily Headlines 12/23",
+        entries.Add(GenerateMessage("12/29/00:01", false, "news 'MNET'", "Daily Headlines 12/29",
             "<head><meta content='mobile' http-equiv='x-ua'><meta charset='ascii'><link rel='dns-prefetch' " + 
             "href='//cdn.optimize/js/131788053' /><link href='//pagead2.syndication' /><link href='//adnetserv' />" +
-            "<link href='//partner.clickthough.paid' /><script story_id='HEADLINE_12_28_LIFE_EXPECTANCY_NEW_HIGHS'" +
+            "<link href='//partner.clickthough.paid' /><script story_id='HEADLINE_12_29_LIFE_EXPECTANCY_NEW_HIGHS'" +
             "crossload='1' storyParam='content' meta='maxSkipCurrentAdAttempts':0,'adLoadTimeout':5000," +
             "'midrollTemporalSlotName':'mid', sponsored:'1',"));
+        entries.Add(GenerateMessage("12/28/21:14", true, "VOICE", "RE: RE: next steps",
+            "no, there's no meaning in it\n\nbut the same could be said about anything"));
+        entries.Add(GenerateMessage("12/28/21:07", true, "VOICE", "RE: next steps",
+            "red line, terminal stop. rec after midnight. back entrance a bit down the tunnel.\n\nit's up to you"));
+        entries.Add(GenerateMessage("12/28/00:03", false, "news 'MNET'", "Daily Headlines 12/28",
+            "<head><meta content='mobile' http-equiv='x-ua'><meta charset='ascii'><link rel='dns-prefetch' " +
+            "href='//cdn.optimize/js/13143467' /><link href='//pagead7.partner' /><link href='//clickserv' />" +
+            "<link href='//sponser.paid.recommended' /><script story_id='HEADLINE_12_28_TOP_NEWYEARS_BEST_LIST'" +
+            "crossload='1' storyParam='content' meta='maxSkipCurrentAdAttempts':0,'adLoadTimeout':5000," +
+            "'trackerId':'15087135538', paid:'1',"));
+        entries.Add(GenerateMessage("12/27/00:03", false, "news 'MNET'", "Daily Headlines 12/27",
+            "<head><meta content='mobile' http-equiv='x-www'><meta charset='ascii'><link rel='dns-prefetch' " +
+            "href='//userserv/id/16447980' /><link href='//adnet/contentserv' /><link href='//likebox/tracker' />" +
+            "<link href='//cookie.domain' /><script story_id='HEADLINE_12_27_HEARTWARMING_WINTER_CLASSIC_MOV'" +
+            "crossload='on' storyParam='content' meta='knownUser':1,'adLoadTimeout':5000," +
+            "'clickBid':'0.000057', undefined:'1',"));
         AddSection("Inbox", entries);
         entries.Clear();
 
