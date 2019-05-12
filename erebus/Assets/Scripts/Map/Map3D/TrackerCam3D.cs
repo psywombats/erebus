@@ -6,7 +6,9 @@ public class TrackerCam3D : MapCamera3D {
     public Vector3 targetOffset;
 
     void Start() {
-        MemorizePosition();
+        if (target == null) {
+            target = Global.Instance().Maps.avatar.GetComponent<MapEvent>();
+        }
     }
 
     public override void ManualUpdate() {

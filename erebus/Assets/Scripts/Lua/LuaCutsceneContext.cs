@@ -47,7 +47,7 @@ public class LuaCutsceneContext : LuaContext {
     protected override void AssignGlobals() {
         base.AssignGlobals();
         lua.Globals["playBGM"] = (Action<DynValue>)PlayBGM;
-        lua.Globals["cs_teleportCoords"] = (Action<DynValue, DynValue, DynValue>)Teleport;
+        //lua.Globals["cs_teleportCoords"] = (Action<DynValue, DynValue, DynValue>)Teleport;
         lua.Globals["cs_teleport"] = (Action<DynValue, DynValue>)Teleport;
         lua.Globals["cs_fadeOutBGM"] = (Action<DynValue>)FadeOutBGM;
         lua.Globals["cs_speak"] = (Action<DynValue, DynValue>)Speak;
@@ -59,9 +59,9 @@ public class LuaCutsceneContext : LuaContext {
         Global.Instance().Audio.PlayBGM(bgmKey.String);
     }
 
-    private void Teleport(DynValue mapName, DynValue x, DynValue y) {
-        RunRoutineFromLua(Global.Instance().Maps.TeleportRoutine(mapName.String, new Vector2Int((int)x.Number, (int)y.Number)));
-    }
+    //private void Teleport(DynValue mapName, DynValue x, DynValue y) {
+    //    RunRoutineFromLua(Global.Instance().Maps.TeleportRoutine(mapName.String, new Vector2Int((int)x.Number, (int)y.Number)));
+    //}
 
     private void Teleport(DynValue mapName, DynValue targetEventName) {
         RunRoutineFromLua(Global.Instance().Maps.TeleportRoutine(mapName.String, targetEventName.String));

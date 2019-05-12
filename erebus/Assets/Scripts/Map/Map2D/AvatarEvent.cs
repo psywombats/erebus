@@ -141,6 +141,10 @@ public class AvatarEvent : MonoBehaviour, InputListener, MemoryPopulater {
                     targetEvent.GetComponent<Dispatch>().Signal(MapEvent.EventCollide, this);
                 }
             }
+            DoorEvent door = GetComponent<MapEvent>().parent.GetEventAt<DoorEvent>(vectors);
+            if (door != null) {
+                Global.Instance().StartCoroutine(door.TeleportRoutine(this));
+            }
         }
         
         return true;

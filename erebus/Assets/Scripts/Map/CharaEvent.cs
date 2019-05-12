@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using UnityEditor;
+using DG.Tweening;
 
 /**
  * For our purposes, a CharaEvent is anything that's going to be moving around the map
@@ -225,6 +226,11 @@ public class CharaEvent : MonoBehaviour {
         }
     }
 
+    public IEnumerator FadeRoutine(float duration, bool inverse = false) {
+        float val = inverse ? 1.0f : 0.0f;
+        yield return CoUtils.RunTween(mainLayer.DOColor(new Color(val, val, val), duration));
+    }
+
     private IEnumerator JumpRoutine(Vector3 startPx, Vector3 targetPx, float duration, bool useJumpFrames = true) {
         jumping = useJumpFrames;
         float elapsed = 0.0f;
@@ -256,11 +262,11 @@ public class CharaEvent : MonoBehaviour {
 
     private void LoadSpritesheetData() {
         string path = GetComponent<MapEvent3D>() == null ? DefaultMaterial2DPath : DefaultMaterial3DPath;
-        foreach (SpriteRenderer renderer in renderers) {
-            if (renderer.material == null) {
-                renderer.material = Resources.Load<Material>(path);
-            }
-        }
+        //foreach (SpriteRenderer renderer in renderers) {
+        //    if (renderer.material == null) {
+        //        renderer.material = Resources.Load<Material>(path);
+        //    }
+        //}
 
         sprites = new Dictionary<string, Sprite>();
         path = AssetDatabase.GetAssetPath(spritesheet);

@@ -280,8 +280,12 @@ public abstract class MapEvent : MonoBehaviour {
     }
 
     public IEnumerator LinearStepRoutine(OrthoDir dir) {
+        yield return LinearStepRoutine(TileToWorldCoords(position));
+    }
+    
+    public IEnumerator LinearStepRoutine(Vector3 targetPx) {
         tracking = true;
-        targetPositionPx = TileToWorldCoords(position);
+        targetPositionPx = targetPx;
         while (true) {
             if (CalcTilesPerSecond() > 0) {
                 positionPx = Vector3.MoveTowards(positionPx,

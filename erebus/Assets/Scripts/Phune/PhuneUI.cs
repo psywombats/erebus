@@ -169,7 +169,7 @@ public class PhuneUI : MonoBehaviour, InputListener {
         entries.Add(GenerateEntry("yabba", null));
         entries.Add(GenerateEntry("yeek", null));
         entries.Add(GenerateEntry("yeek", null));
-        AddSection("Yeeks", entries);
+        AddSection("System Info", entries);
         entries.Clear();
 
         entries.Add(GenerateMessage("12/29/23:05", true, "VOICE", "remember",
@@ -213,6 +213,13 @@ public class PhuneUI : MonoBehaviour, InputListener {
             "crossload='on' storyParam='content' meta='knownUser':1,'adLoadTimeout':5000," +
             "'clickBid':'0.000057', undefined:'1',"));
         AddSection("Inbox", entries);
+        entries.Clear();
+
+        entries.Add(GenerateEntry("yabba", null));
+        entries.Add(GenerateEntry("yabba", null));
+        entries.Add(GenerateEntry("yeek", null));
+        entries.Add(GenerateEntry("yeek", null));
+        AddSection("Software", entries);
         entries.Clear();
 
         selection = allCells[0];
