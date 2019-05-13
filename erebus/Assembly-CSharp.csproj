@@ -90,6 +90,7 @@
     <Compile Include="Assets\Scripts\Animation\LightOscillator.cs" />
     <Compile Include="Assets\Scripts\Animation\LuaAnimation.cs" />
     <Compile Include="Assets\Scripts\Animation\Oscillator.cs" />
+    <Compile Include="Assets\Scripts\Animation\RotationBehavior.cs" />
     <Compile Include="Assets\Scripts\Animation\SimpleSpriteAnimator.cs" />
     <Compile Include="Assets\Scripts\Animation\SubJitter.cs" />
     <Compile Include="Assets\Scripts\Audio\AudioManager.cs" />

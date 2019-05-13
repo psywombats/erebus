@@ -12,8 +12,10 @@ public class TrackerCam3D : MapCamera3D {
     }
 
     public override void ManualUpdate() {
-        transform.position = target.transform.position + targetOffset;
-        base.ManualUpdate();
+        if (target != null) {
+            transform.position = target.transform.position + targetOffset;
+            base.ManualUpdate();
+        }
     }
 
     public void MemorizePosition() {
