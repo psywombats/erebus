@@ -24,8 +24,8 @@ public abstract class MapEvent : MonoBehaviour {
     public const string EventMove = "move";
 
     // Editor properties
-    [HideInInspector] public Vector2Int position = new Vector2Int(0, 0);
-    [HideInInspector] public Vector2Int size = new Vector2Int(1, 1);
+    public Vector2Int position = new Vector2Int(0, 0);
+    public Vector2Int size = new Vector2Int(1, 1);
     [Space]
     [Header("Movement")]
     public float tilesPerSecond = 2.0f;
