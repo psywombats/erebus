@@ -320,6 +320,9 @@
     <Compile Include="Assets\Plugins\MoonSharp\Interpreter\Tree\Statements\ScopeBlockStatement.cs" />
     <Compile Include="Assets\Plugins\MoonSharp\Interpreter\Tree\Statements\WhileStatement.cs" />
     <Compile Include="Assets\Plugins\ObjExporter.cs" />
+    <Compile Include="Assets\Standard Assets\Environment\Water (Basic)\Scripts\WaterBasic.cs" />
+    <None Include="Assets\Standard Assets\Environment\Water (Basic)\DO_NOT_WORK_IN_VR.txt" />
+    <None Include="Assets\Standard Assets\Environment\Water (Basic)\Shaders\FXWaterBasic.shader" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>C:/Users/aking_2/erebus/erebus/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>

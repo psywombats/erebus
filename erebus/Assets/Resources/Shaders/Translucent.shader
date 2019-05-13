@@ -67,6 +67,9 @@ Shader "Custom/Translucent" {
 			// Add the two together.
 			fixed4 c;
 			c.rgb = diffAlbedo + transAlbedo;
+            if (c.r > 1.0) c.r = 1.0;
+            if (c.g > 1.0) c.g = 1.0;
+            if (c.b > 1.0) c.b = 1.0;
 			c.a = _LightColor0.a * _SpecColor.a * spec * atten;
 			return c;
 		}

@@ -3,10 +3,18 @@ using System.Collections;
 
 [RequireComponent(typeof(Light))]
 public class LightOscillator : Oscillator {
-    
+
+    public Color newColor = Color.white;
     public float rangeOffset;
     public float intensityOffset;
 
+    [Space]
+    [Range(0, 0.5f)] public float flickerChance;
+    public float flickerRange;
+    public float flickerIntensity;
+    public Color flickerColor = Color.white;
+
+    private Color originalColor;
     private float originalIntensity;
     private float originalRange;
 
@@ -14,6 +22,7 @@ public class LightOscillator : Oscillator {
         base.Start();
 
         Light light = GetComponent<Light>();
+        originalColor = light.color;
         originalIntensity = light.intensity;
         originalRange = light.range;
     }
@@ -22,7 +31,14 @@ public class LightOscillator : Oscillator {
         float vectorMult = CalcVectorMult();
         Light light = GetComponent<Light>();
 
-        light.intensity = originalIntensity + intensityOffset * vectorMult;
-        light.range = originalRange + rangeOffset * vectorMult;
+        if (Random.Range(0.0f, 1.0f) < flickerChance) {
+            light.intensity = originalIntensity + flickerIntensity;
+            light.range = originalRange + flickerRange;
+            light.color = flickerColor;
+        } else {
+            light.intensity = originalIntensity + intensityOffset * vectorMult;
+            light.range = originalRange + rangeOffset * vectorMult;
+            light.color = originalColor * (1.0f - vectorMult) + newColor * vectorMult;
+        }
     }
 }
