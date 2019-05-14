@@ -113,6 +113,7 @@
     <Compile Include="Assets\Scripts\ImageEffects\FrameSoundEffect.cs" />
     <Compile Include="Assets\Scripts\ImageEffects\GlitchBehavior.cs" />
     <Compile Include="Assets\Scripts\ImageEffects\GlitchImageEffect.cs" />
+    <Compile Include="Assets\Scripts\ImageEffects\LightControlBehavior.cs" />
     <Compile Include="Assets\Scripts\ImageEffects\LightSoundBehavior.cs" />
     <Compile Include="Assets\Scripts\ImageEffects\SmearBehavior.cs" />
     <Compile Include="Assets\Scripts\ImageEffects\SoundEmitterBehavior.cs" />

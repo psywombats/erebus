@@ -3,6 +3,8 @@ using System.Collections;
 
 public abstract class SoundEmitterBehavior : MonoBehaviour {
 
+    public static bool soundEnabled = false;
+
     public bool useAlpha = true;
     public bool useColor = true;
     public bool swapBands = false;
@@ -22,6 +24,10 @@ public abstract class SoundEmitterBehavior : MonoBehaviour {
     }
 
     public void Update() {
+        if (!soundEnabled) {
+            return;
+        }
+
         float band1 = Global.Instance().Audio.GetWaveSource().GetLowBand();
         float band2 = Global.Instance().Audio.GetWaveSource().GetHighBand();
 
