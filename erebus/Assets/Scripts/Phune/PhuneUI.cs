@@ -20,16 +20,20 @@ public class PhuneUI : MonoBehaviour, InputListener {
     public PhuneMessageCell textPrefab;
     [Space]
     public TxtUI uiText;
+    [Space]
+    public List<SlowFlashBehavior> tabsToTurnOff;
+    [Space]
+    public List<PhuneEntryData> dataModel;
 
     private Vector3 originalPosition;
-    private bool shown = true;
+    private bool shown = false;
     private bool subselectionMode;
 
     private Dictionary<PhuneHeaderCell, List<PhuneEntryCell>> entries;
     private List<PhuneCell> allCells;
     private PhuneCell selection;
 
-    private static HashSet<string> readMessageDates = new HashSet<string>();
+    private static HashSet<PhuneEntryData> readMessages = new HashSet<PhuneEntryData>();
 
     public void Awake() {
         originalPosition = transform.localPosition;
@@ -38,6 +42,8 @@ public class PhuneUI : MonoBehaviour, InputListener {
         entries = new Dictionary<PhuneHeaderCell, List<PhuneEntryCell>>();
         allCells = new List<PhuneCell>();
         ReloadData();
+
+        DontDestroyOnLoad(transform.parent.gameObject);
     }
 
     public bool OnCommand(InputManager.Command command, InputManager.Event eventType) {
@@ -127,16 +133,19 @@ public class PhuneUI : MonoBehaviour, InputListener {
         }));
     }
 
-    public bool IsMessageRead(string date) {
-        bool result = readMessageDates.Contains(date);
+    public bool IsMessageRead(PhuneTxtData data) {
+        bool result = readMessages.Contains(data);
         return result;
     }
 
-    public void MarkMessageRead(string date) {
-        readMessageDates.Add(date);
+    public void MarkMessageRead(PhuneTxtData data) {
+        readMessages.Add(data);
     }
 
     public IEnumerator ShowRoutine() {
+        foreach (SlowFlashBehavior flash in tabsToTurnOff) {
+            flash.disable = true;
+        }
         shown = true;
         Global.Instance().Input.PushListener(this);
         yield return CoUtils.RunTween(DOTween.To(
@@ -163,64 +172,21 @@ public class PhuneUI : MonoBehaviour, InputListener {
             Destroy(child.gameObject);
         }
 
-        List<PhuneEntryCell> entries = new List<PhuneEntryCell>();
+        Dictionary<PhuneCategoryData, List<PhuneEntryCell>> entriesByCategory =
+                new Dictionary<PhuneCategoryData, List<PhuneEntryCell>>();
 
-        entries.Add(GenerateEntry("yabba", null));
-        entries.Add(GenerateEntry("yabba", null));
-        entries.Add(GenerateEntry("yeek", null));
-        entries.Add(GenerateEntry("yeek", null));
-        AddSection("System Info", entries);
-        entries.Clear();
+        foreach (PhuneEntryData data in dataModel) {
+            if (!entriesByCategory.ContainsKey(data.category)) {
+                List<PhuneEntryCell> newSiblings = new List<PhuneEntryCell>();
+                entriesByCategory[data.category] = newSiblings;
+            }
+            List<PhuneEntryCell> siblings = entriesByCategory[data.category];
+            siblings.Add(GenerateEntry(data));
+        }
 
-        entries.Add(GenerateMessage("12/29/23:05", true, "VOICE", "remember",
-            "do you remember a place?\n" +
-            "a person, time, space, state of mind?\n" +
-            "a place that is not here, now\n" +
-            "that will never be here, again\n" +
-            "never.\n" +
-            "but instead\n" +
-            "a 'here' and 'now' can be restored\n" +
-            "how\n" +
-            "this is the task at hand, the focus\n" +
-            "focus\n" +
-            "discard the emotion\n" +
-            "jettison the ego\n" +
-            "remove the self\n" +
-            "destroy the conscience\n" +
-            "you are your action and you are your purpose\n" +
-            "perform your mission"
-            ));
-        entries.Add(GenerateMessage("12/29/00:01", false, "news 'MNET'", "Daily Headlines 12/29",
-            "<head><meta content='mobile' http-equiv='x-ua'><meta charset='ascii'><link rel='dns-prefetch' " + 
-            "href='//cdn.optimize/js/131788053' /><link href='//pagead2.syndication' /><link href='//adnetserv' />" +
-            "<link href='//partner.clickthough.paid' /><script story_id='HEADLINE_12_29_LIFE_EXPECTANCY_NEW_HIGHS'" +
-            "crossload='1' storyParam='content' meta='maxSkipCurrentAdAttempts':0,'adLoadTimeout':5000," +
-            "'midrollTemporalSlotName':'mid', sponsored:'1',"));
-        entries.Add(GenerateMessage("12/28/21:14", true, "VOICE", "RE: RE: next steps",
-            "no, there's no meaning in it\n\nbut the same could be said about anything"));
-        entries.Add(GenerateMessage("12/28/21:07", true, "VOICE", "RE: next steps",
-            "red line, terminal stop. rec after midnight. back entrance a bit down the tunnel.\n\nit's up to you"));
-        entries.Add(GenerateMessage("12/28/00:03", false, "news 'MNET'", "Daily Headlines 12/28",
-            "<head><meta content='mobile' http-equiv='x-ua'><meta charset='ascii'><link rel='dns-prefetch' " +
-            "href='//cdn.optimize/js/13143467' /><link href='//pagead7.partner' /><link href='//clickserv' />" +
-            "<link href='//sponser.paid.recommended' /><script story_id='HEADLINE_12_28_TOP_NEWYEARS_BEST_LIST'" +
-            "crossload='1' storyParam='content' meta='maxSkipCurrentAdAttempts':0,'adLoadTimeout':5000," +
-            "'trackerId':'15087135538', paid:'1',"));
-        entries.Add(GenerateMessage("12/27/00:03", false, "news 'MNET'", "Daily Headlines 12/27",
-            "<head><meta content='mobile' http-equiv='x-www'><meta charset='ascii'><link rel='dns-prefetch' " +
-            "href='//userserv/id/16447980' /><link href='//adnet/contentserv' /><link href='//likebox/tracker' />" +
-            "<link href='//cookie.domain' /><script story_id='HEADLINE_12_27_HEARTWARMING_WINTER_CLASSIC_MOV'" +
-            "crossload='on' storyParam='content' meta='knownUser':1,'adLoadTimeout':5000," +
-            "'clickBid':'0.000057', undefined:'1',"));
-        AddSection("Inbox", entries);
-        entries.Clear();
-
-        entries.Add(GenerateEntry("yabba", null));
-        entries.Add(GenerateEntry("yabba", null));
-        entries.Add(GenerateEntry("yeek", null));
-        entries.Add(GenerateEntry("yeek", null));
-        AddSection("Software", entries);
-        entries.Clear();
+        foreach (PhuneCategoryData category in entriesByCategory.Keys) {
+            AddSection(category.GetSummary(), entriesByCategory[category]);
+        }
 
         selection = allCells[0];
         selection.Populate(true);
@@ -242,16 +208,20 @@ public class PhuneUI : MonoBehaviour, InputListener {
         }
     }
 
-    private PhuneEntryCell GenerateEntry(string text, Action action) {
-        PhuneEntryCell cell = Instantiate(entryPrefab);
-        cell.Populate(false, text, action);
-        return cell;
+    private PhuneEntryCell GenerateEntry(PhuneEntryData data) {
+        if (data is PhuneTxtData) {
+            return GenerateMessage((PhuneTxtData)data);
+        } else {
+            PhuneEntryCell cell = Instantiate(entryPrefab);
+            cell.Populate(false, data.GetSummary(), () => { });
+            return cell;
+        }
     }
 
-    private PhuneMessageCell GenerateMessage(string date, bool preread, string from, string subj, string content) {
+    private PhuneMessageCell GenerateMessage(PhuneTxtData data) {
         PhuneMessageCell cell = Instantiate(textPrefab);
-        if (preread) readMessageDates.Add(date);
-        cell.Populate(this, false, IsMessageRead(date), date, from, subj, content);
+        if (data.preread) readMessages.Add(data);
+        cell.Populate(this, data, false, IsMessageRead(data));
         return cell;
     }
 

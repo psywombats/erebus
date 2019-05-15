@@ -3,8 +3,9 @@ using System.Collections;
 
 public abstract class SoundEmitterBehavior : MonoBehaviour {
 
-    public static bool soundEnabled = false;
-
+    public bool soundModeOnly = true;
+    public bool lightsOffModeOnly = false;
+    [Space]
     public bool useAlpha = true;
     public bool useColor = true;
     public bool swapBands = false;
@@ -24,7 +25,10 @@ public abstract class SoundEmitterBehavior : MonoBehaviour {
     }
 
     public void Update() {
-        if (!soundEnabled) {
+        if (soundModeOnly && !LightControlBehavior.soundMode) {
+            return;
+        }
+        if (lightsOffModeOnly && !LightControlBehavior.lightsOutMode) {
             return;
         }
 

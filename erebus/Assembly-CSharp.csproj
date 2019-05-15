@@ -92,6 +92,9 @@
     <Compile Include="Assets\Scripts\Animation\Oscillator.cs" />
     <Compile Include="Assets\Scripts\Animation\RotationBehavior.cs" />
     <Compile Include="Assets\Scripts\Animation\SimpleSpriteAnimator.cs" />
+    <Compile Include="Assets\Scripts\Animation\SlowFlashBehavior.cs" />
+    <Compile Include="Assets\Scripts\Animation\SlowFlashImageBehavior.cs" />
+    <Compile Include="Assets\Scripts\Animation\SlowFlashTextBehavior.cs" />
     <Compile Include="Assets\Scripts\Animation\SubJitter.cs" />
     <Compile Include="Assets\Scripts\Audio\AudioManager.cs" />
     <Compile Include="Assets\Scripts\Audio\SFX.cs" />
@@ -103,6 +106,10 @@
     <Compile Include="Assets\Scripts\Data\GenericDataObject.cs" />
     <Compile Include="Assets\Scripts\Data\GenericIndex.cs" />
     <Compile Include="Assets\Scripts\Data\IndexDatabase.cs" />
+    <Compile Include="Assets\Scripts\Data\Phune\PhuneData.cs" />
+    <Compile Include="Assets\Scripts\Data\PhuneCategoryData.cs" />
+    <Compile Include="Assets\Scripts\Data\PhuneEntryData.cs" />
+    <Compile Include="Assets\Scripts\Data\PhuneTxtData.cs" />
     <Compile Include="Assets\Scripts\Data\SoundEffectIndexData.cs" />
     <Compile Include="Assets\Scripts\Data\TransitionIndexData.cs" />
     <Compile Include="Assets\Scripts\Global.cs" />

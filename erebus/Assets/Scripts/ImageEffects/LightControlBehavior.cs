@@ -5,8 +5,8 @@ using System.Collections.Generic;
 [ExecuteInEditMode]
 public class LightControlBehavior : MonoBehaviour {
 
-    public bool lightsOutMode = true;
-    public bool soundMode = false;
+    public static bool lightsOutMode = true;
+    public static bool soundMode = false;
     public List<GameObject> lightsOnOnly = new List<GameObject>();
     public List<GameObject> lightsOffOnly = new List<GameObject>();
     public List<GameObject> soundOnly = new List<GameObject>();

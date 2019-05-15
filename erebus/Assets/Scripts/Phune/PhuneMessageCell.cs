@@ -7,18 +7,20 @@ public class PhuneMessageCell : PhuneEntryCell {
     public Image readIcon;
     public Image unreadIcon;
 
+    private PhuneUI presenter;
+    private PhuneTxtData data;
     private bool read;
     private string subj, date, from, content;
-    private PhuneUI presenter;
 
-    public void Populate(PhuneUI presenter, bool on, bool read, string date, string from, string subj, string content) {
+    public void Populate(PhuneUI presenter, PhuneTxtData data, bool on, bool read) {
+        this.data = data;
         this.read = read;
-        Populate(on, subj, ShowText);
+        Populate(on, data.subject, ShowText);
         this.presenter = presenter;
-        this.subj = subj;
-        this.date = date;
-        this.from = from;
-        this.content = content;
+        subj = data.subject;
+        date = data.date;
+        from = data.from;
+        content = data.contents;
     }
 
     public override void Populate(bool on) {
@@ -31,7 +33,7 @@ public class PhuneMessageCell : PhuneEntryCell {
         presenter.SelectEntry();
         presenter.uiText.Populate(date, from, subj, content);
         presenter.uiText.gameObject.SetActive(true);
-        presenter.MarkMessageRead(date);
+        presenter.MarkMessageRead(data);
         read = true;
         Populate(on);
     }
