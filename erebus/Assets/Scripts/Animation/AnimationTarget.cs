@@ -118,23 +118,23 @@ public class AnimationTarget : MonoBehaviour {
     // === LUA FUNCTIONS ===========================================================================
 
     // quake({power? duration?})
-    public void quake(DynValue args) { CSRun(cs_quake(args), args); }
-    private IEnumerator cs_quake(DynValue args) {
-        float elapsed = 0.0f;
-        float duration = FloatArg(args, ArgDuration, 0.25f);
-        float power = FloatArg(args, ArgPower, 0.2f);
-        DuelCam cam = DuelCam.Instance();
-        Vector3 camPosition = cam.transform.localPosition;
-        while (elapsed < duration) {
-            elapsed += Time.deltaTime;
-            cam.transform.localPosition = new Vector3(
-                    camPosition.x + UnityEngine.Random.Range(-power, power),
-                    camPosition.y + UnityEngine.Random.Range(-power, power),
-                    camPosition.z);
-            yield return null;
-        }
-        cam.transform.localPosition = camPosition;
-    }
+    //public void quake(DynValue args) { CSRun(cs_quake(args), args); }
+    //private IEnumerator cs_quake(DynValue args) {
+    //    float elapsed = 0.0f;
+    //    float duration = FloatArg(args, ArgDuration, 0.25f);
+    //    float power = FloatArg(args, ArgPower, 0.2f);
+    //    DuelCam cam = DuelCam.Instance();
+    //    Vector3 camPosition = cam.transform.localPosition;
+    //    while (elapsed < duration) {
+    //        elapsed += Time.deltaTime;
+    //        cam.transform.localPosition = new Vector3(
+    //                camPosition.x + UnityEngine.Random.Range(-power, power),
+    //                camPosition.y + UnityEngine.Random.Range(-power, power),
+    //                camPosition.z);
+    //        yield return null;
+    //    }
+    //    cam.transform.localPosition = camPosition;
+    //}
 
     // tint({r, g, b, a?, duration?, speed?})
     public void tint(DynValue args) { CSRun(cs_tint(args), args); }

@@ -24,12 +24,15 @@ public class PhuneUI : MonoBehaviour, InputListener {
     public List<SlowFlashBehavior> tabsToTurnOff;
     [Space]
     public List<PhuneEntryData> dataModel;
+    [Space]
+    public GameObject invertLightsPane;
 
     private Vector3 originalPosition;
     private bool shown = false;
     private bool subselectionMode;
 
     private Dictionary<PhuneHeaderCell, List<PhuneEntryCell>> entries;
+    private List<PhuneEntryData> tempData;
     private List<PhuneCell> allCells;
     private PhuneCell selection;
 
@@ -40,10 +43,17 @@ public class PhuneUI : MonoBehaviour, InputListener {
         Global.Instance().Input.PushListener(this);
 
         entries = new Dictionary<PhuneHeaderCell, List<PhuneEntryCell>>();
+        tempData = new List<PhuneEntryData>();
         allCells = new List<PhuneCell>();
         ReloadData();
 
         DontDestroyOnLoad(transform.parent.gameObject);
+    }
+
+    public void AddTempData(PhuneEntryData data) {
+        dataModel.Add(data);
+        tempData.Add(data);
+        ReloadData();
     }
 
     public bool OnCommand(InputManager.Command command, InputManager.Event eventType) {
@@ -143,22 +153,29 @@ public class PhuneUI : MonoBehaviour, InputListener {
     }
 
     public IEnumerator ShowRoutine() {
+        ReloadData();
         foreach (SlowFlashBehavior flash in tabsToTurnOff) {
             flash.disable = true;
         }
-        shown = true;
         Global.Instance().Input.PushListener(this);
-        yield return CoUtils.RunTween(DOTween.To(
+        yield return CoUtils.RunWithCallback(CoUtils.RunTween(DOTween.To(
             () => GetComponent<RectTransform>().localPosition,
             (Vector3 newPos) => GetComponent<RectTransform>().localPosition = newPos,
             originalPosition + appearOffset,
             snapTime)
-            .SetOptions(true));
+            .SetOptions(true)), 
+            () => {
+                shown = true;
+            });
     }
 
     public IEnumerator HideRoutine() {
         shown = false;
         Global.Instance().Input.RemoveListener(this);
+        foreach (PhuneEntryData data in tempData) {
+            dataModel.Remove(data);
+        }
+        tempData.Clear();
         yield return CoUtils.RunTween(DOTween.To(
             () => GetComponent<RectTransform>().localPosition,
             (Vector3 newPos) => GetComponent<RectTransform>().localPosition = newPos,
@@ -168,6 +185,7 @@ public class PhuneUI : MonoBehaviour, InputListener {
     }
 
     private void ReloadData() {
+        allCells.Clear();
         foreach (Transform child in attachPoint.transform) {
             Destroy(child.gameObject);
         }
@@ -211,6 +229,18 @@ public class PhuneUI : MonoBehaviour, InputListener {
     private PhuneEntryCell GenerateEntry(PhuneEntryData data) {
         if (data is PhuneTxtData) {
             return GenerateMessage((PhuneTxtData)data);
+        } else if (data is PhuneUplinkData) {
+            PhuneEntryCell cell = Instantiate(entryPrefab);
+            cell.Populate(false, data.GetSummary(), () => {
+                SelectEntry();
+                PhuneUplinkData uplink = (PhuneUplinkData)data;
+                switch (uplink.program) {
+                    case PhuneProgramType.ProgramInvertLights:
+                        invertLightsPane.SetActive(true);
+                        break;
+                }
+            });
+            return cell;
         } else {
             PhuneEntryCell cell = Instantiate(entryPrefab);
             cell.Populate(false, data.GetSummary(), () => { });

@@ -78,17 +78,12 @@
     <Compile Include="Assets\Editor\Brushes\EditTilesetBrush.cs" />
     <Compile Include="Assets\Editor\Editors\AnimationPlayerEditor.cs" />
     <Compile Include="Assets\Editor\Editors\AutoExpandingScriptableDrawer.cs" />
-    <Compile Include="Assets\Editor\Editors\BattleControllerEditor.cs" />
-    <Compile Include="Assets\Editor\Editors\BattleEventEditor.cs" />
     <Compile Include="Assets\Editor\Editors\CharaEventEditor.cs" />
     <Compile Include="Assets\Editor\Editors\ClipInfo.cs" />
     <Compile Include="Assets\Editor\Editors\GridSelectionEditor.cs" />
     <Compile Include="Assets\Editor\Editors\InstanceMultiControllerEditor.cs" />
     <Compile Include="Assets\Editor\Editors\MapCameraEditor.cs" />
     <Compile Include="Assets\Editor\Editors\MapEventEditor.cs" />
-    <Compile Include="Assets\Editor\Editors\SkillEditor.cs" />
-    <Compile Include="Assets\Editor\Editors\StatSetDrawer.cs" />
-    <Compile Include="Assets\Editor\Editors\TacticsCameraEditor.cs" />
     <Compile Include="Assets\Editor\Editors\TacticsTerrainEditor.cs" />
     <Compile Include="Assets\Editor\Editors\TileEditor.cs" />
     <Compile Include="Assets\Editor\Editors\TilesetOverlayEditor.cs" />

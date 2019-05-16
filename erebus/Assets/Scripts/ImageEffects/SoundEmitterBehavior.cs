@@ -25,10 +25,10 @@ public abstract class SoundEmitterBehavior : MonoBehaviour {
     }
 
     public void Update() {
-        if (soundModeOnly && !LightControlBehavior.soundMode) {
+        if (soundModeOnly && !Global.Instance().IsSoundMode()) {
             return;
         }
-        if (lightsOffModeOnly && !LightControlBehavior.lightsOutMode) {
+        if (lightsOffModeOnly && !Global.Instance().IsLightsOutMode()) {
             return;
         }
 

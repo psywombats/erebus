@@ -24,12 +24,6 @@ public class CharaAnimationTarget : AnimationTarget {
     private Vector3 originalDollPos;
 
     [MoonSharpHidden]
-    public void ConfigureToBattler(BattleEvent battler) {
-        chara.spritesheet = battler.GetComponent<CharaEvent>().spritesheet;
-        chara.itemSprite = battler.unit.unit.equippedItem.sprite;
-    }
-
-    [MoonSharpHidden]
     public void PrepareForBattleAnimation(BattleAnimationPlayer player, Type type) {
         this.player = player;
         this.type = type;

@@ -8,7 +8,6 @@ public class MapManager : MonoBehaviour {
 
     public Map activeMap { get; set; }
     public AvatarEvent avatar { get; set; }
-    public DuelMap activeDuelMap { get; set; }
     public SceneBlendController blendController { get; set; }
 
     private MapCamera _camera;

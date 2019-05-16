@@ -6,7 +6,6 @@ public class BattleAnimationPlayer : AnimationPlayer {
 
     public CharaAnimationTarget attacker = null;
     public CharaAnimationTarget defender = null;
-    public Item debugItem;
 
     public override void EditorReset() {
         base.EditorReset();
@@ -37,10 +36,10 @@ public class BattleAnimationPlayer : AnimationPlayer {
             }
         }
 
-        if (debugItem != null) {
-            attacker.chara.itemSprite = debugItem.sprite;
-            defender.chara.itemSprite = debugItem.sprite;
-        }
+        //if (debugItem != null) {
+        //    attacker.chara.itemSprite = debugItem.sprite;
+        //    defender.chara.itemSprite = debugItem.sprite;
+        //}
 
         SetUpLua();
         attacker.PrepareForBattleAnimation(this, CharaAnimationTarget.Type.Attacker);
