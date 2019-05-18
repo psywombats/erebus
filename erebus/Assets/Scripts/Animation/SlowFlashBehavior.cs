@@ -13,6 +13,10 @@ public abstract class SlowFlashBehavior : MonoBehaviour {
     private float elapsed;
     private bool off;
 
+    public void Awake() {
+        disable = true;
+    }
+
     public void Start() {
         originalAlpha = GetAlpha();
     }

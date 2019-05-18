@@ -13,6 +13,7 @@ public class UplinkEvent : MonoBehaviour {
     public void OnInteract(object payload) {
         PhuneUI phune = FindObjectOfType<PhuneUI>();
         phune.AddTempData(uplink);
+        phune.SetDefaultTab(uplink.category);
         StartCoroutine(phune.ShowRoutine());
     }
 }

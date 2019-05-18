@@ -174,7 +174,7 @@ public class CharaEvent : MonoBehaviour {
         }
     }
 
-    public IEnumerator StepRoutine(OrthoDir dir) {
+    public IEnumerator StepRoutine(OrthoDir dir, bool applyOffset = false) {
         facing = dir;
         Vector2Int offset = parent.OffsetForTiles(dir);
         Vector3 startPx = parent.positionPx;

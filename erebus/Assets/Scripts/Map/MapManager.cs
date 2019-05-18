@@ -57,7 +57,6 @@ public class MapManager : MonoBehaviour {
         activeMap = map;
         activeMap.OnTeleportTo();
         avatar.GetComponent<MapEvent>().SetLocation(location);
-        avatar.GetComponent<MapEvent>().SetScreenPositionToMatchTilePosition();
     }
 
     private Map InstantiateMap(string mapName) {

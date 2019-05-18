@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 
-[ExecuteInEditMode]
 public class LightControlBehavior : MonoBehaviour {
 
     public List<GameObject> lightsOnOnly = new List<GameObject>();

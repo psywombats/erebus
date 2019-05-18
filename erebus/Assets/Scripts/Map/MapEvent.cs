@@ -40,13 +40,11 @@ public abstract class MapEvent : MonoBehaviour {
     public LuaMapEvent luaObject { get; private set; }
     public Vector3 targetPositionPx { get; set; }
     public bool tracking { get; private set; }
-
-    private Vector3 _internalPosition;
+    
     public Vector3 positionPx {
-        get { return _internalPosition; }
+        get { return transform.localPosition; }
         set {
-            _internalPosition = value;
-            transform.localPosition = InternalPositionToDisplayPosition(_internalPosition);
+            transform.localPosition = value;
         }
     }
 
@@ -121,8 +119,6 @@ public abstract class MapEvent : MonoBehaviour {
             luaObject.Set(PropertyCollide, luaOnCollide);
             luaObject.Set(PropertyInteract, luaOnInteract);
             luaObject.Set(PropertyCondition, luaCondition);
-
-            positionPx = transform.localPosition;
 
             GetComponent<Dispatch>().RegisterListener(EventCollide, (object payload) => {
                 OnCollide((AvatarEvent)payload);

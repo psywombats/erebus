@@ -47,7 +47,8 @@ public class AudioManager : MonoBehaviour, MemoryPopulater {
         PlaySFX(enumValue.ToString());
     }
     public void PlaySFX(string key) {
-        AudioClip clip = Global.Instance().Database.SFX.GetData(key).clip;
+        IndexDatabase db = Global.Instance().Database;
+        AudioClip clip = db.SFX.GetData(key).clip;
         StartCoroutine(PlaySFXRoutine(sfxSource, clip));
     }
 

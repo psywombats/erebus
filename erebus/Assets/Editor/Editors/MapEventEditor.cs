@@ -10,8 +10,8 @@ public class MapEventEditor : Editor {
         MapEvent mapEvent = (MapEvent)target;
 
         if (GUI.changed) {
-            mapEvent.SetScreenPositionToMatchTilePosition();
-            mapEvent.SetDepth();
+            //mapEvent.SetScreenPositionToMatchTilePosition();
+            //mapEvent.SetDepth();
         }
 
         if (!mapEvent.GetComponent<CharaEvent>()) {
@@ -45,7 +45,7 @@ public class MapEventEditor : Editor {
     }
 
     public void OnSceneGUI() {
-        ((MapEvent)target).transform.position = Handles.PositionHandle(((MapEvent)target).transform.position, Quaternion.identity);
+        //((MapEvent)target).transform.position = Handles.PositionHandle(((MapEvent)target).transform.position, Quaternion.identity);
     }
 
     public void OnEnable() {

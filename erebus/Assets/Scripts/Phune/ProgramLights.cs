@@ -14,10 +14,6 @@ public class ProgramLights : MonoBehaviour, InputListener {
         offObject.SetActive(Global.Instance().IsLightsOutMode());
     }
 
-    public void OnDisable() {
-        Global.Instance().Input.RemoveListener(this);
-    }
-
     public bool OnCommand(InputManager.Command command, InputManager.Event eventType) {
         if (eventType != InputManager.Event.Up) {
             return true;
@@ -30,9 +26,8 @@ public class ProgramLights : MonoBehaviour, InputListener {
                 break;
             case InputManager.Command.Cancel:
             case InputManager.Command.Left:
-                if (!toggling) {
-                    return false;
-                }
+                FindObjectOfType<PhuneUI>().SelectEntry(true);
+                Global.Instance().Input.RemoveListener(this);
                 break;
             default:
                 return true;

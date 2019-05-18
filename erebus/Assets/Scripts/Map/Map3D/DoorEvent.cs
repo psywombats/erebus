@@ -4,12 +4,18 @@ using System.Collections;
 [RequireComponent(typeof(MapEvent3D))]
 public class DoorEvent : MonoBehaviour {
 
+    public OrthoDir dir;
+
     public SimpleSpriteAnimator animator;
     [Space]
     public string mapName;
     public string targetEventName;
 
-    public IEnumerator TeleportRoutine(AvatarEvent avatar) {
+    public virtual IEnumerator TeleportRoutine(AvatarEvent avatar) {
+        if (avatar.GetComponent<CharaEvent>().facing != dir) {
+            yield break;
+        }
+
         avatar.PauseInput();
         while (avatar.GetComponent<MapEvent>().tracking) {
             yield return null;
@@ -23,6 +29,7 @@ public class DoorEvent : MonoBehaviour {
         }, this);
         yield return CoUtils.Wait(animator.frameDuration * 2);
         yield return Global.Instance().Maps.TeleportRoutine(mapName, targetEventName);
+        yield return avatar.GetComponent<MapEvent>().StepRoutine(avatar.GetComponent<CharaEvent>().facing);
         avatar.UnpauseInput();
     }
 }

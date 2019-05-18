@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 
-[ExecuteInEditMode]
 public class MapEvent3D : MapEvent {
 
     public override Vector3 TileToWorldCoords(Vector2Int position) {
@@ -38,18 +37,6 @@ public class MapEvent3D : MapEvent {
 
     public override float CalcTilesPerSecond() {
         return tilesPerSecond;
-    }
-
-    public override void Update() {
-        base.Update();
-        if (!Application.isPlaying) {
-            position = WorldPositionTileCoords(transform.localPosition);
-            Vector2 sizeDelta = GetComponent<RectTransform>().sizeDelta;
-            size = new Vector2Int(
-                Mathf.RoundToInt(sizeDelta.x),
-                Mathf.RoundToInt(sizeDelta.y));
-        }
-        SetDepth();
     }
 
     public override OrthoDir DirectionTo(Vector2Int position) {

@@ -26,6 +26,7 @@ public class PhuneUI : MonoBehaviour, InputListener {
     public List<PhuneEntryData> dataModel;
     [Space]
     public GameObject invertLightsPane;
+    public GameObject elevatorPane;
 
     private Vector3 originalPosition;
     private bool shown = false;
@@ -35,6 +36,7 @@ public class PhuneUI : MonoBehaviour, InputListener {
     private List<PhuneEntryData> tempData;
     private List<PhuneCell> allCells;
     private PhuneCell selection;
+    private PhuneCategoryData defaultCat;
 
     private static HashSet<PhuneEntryData> readMessages = new HashSet<PhuneEntryData>();
 
@@ -53,6 +55,11 @@ public class PhuneUI : MonoBehaviour, InputListener {
     public void AddTempData(PhuneEntryData data) {
         dataModel.Add(data);
         tempData.Add(data);
+        ReloadData();
+    }
+
+    public void AddData(PhuneEntryData data) {
+        dataModel.Add(data);
         ReloadData();
     }
 
@@ -139,6 +146,8 @@ public class PhuneUI : MonoBehaviour, InputListener {
         StartCoroutine(CoUtils.RunWithCallback(CoUtils.RunTween(tween), () => {
             if (deselect) {
                 uiText.gameObject.SetActive(false);
+                invertLightsPane.SetActive(false);
+                elevatorPane.SetActive(false);
             }
         }));
     }
@@ -152,21 +161,22 @@ public class PhuneUI : MonoBehaviour, InputListener {
         readMessages.Add(data);
     }
 
+    public void SetDefaultTab(PhuneCategoryData category) {
+        defaultCat = category;
+    }
+
     public IEnumerator ShowRoutine() {
         ReloadData();
         foreach (SlowFlashBehavior flash in tabsToTurnOff) {
             flash.disable = true;
         }
         Global.Instance().Input.PushListener(this);
-        yield return CoUtils.RunWithCallback(CoUtils.RunTween(DOTween.To(
+        shown = true;
+        yield return CoUtils.RunTween(DOTween.To(
             () => GetComponent<RectTransform>().localPosition,
             (Vector3 newPos) => GetComponent<RectTransform>().localPosition = newPos,
             originalPosition + appearOffset,
-            snapTime)
-            .SetOptions(true)), 
-            () => {
-                shown = true;
-            });
+            snapTime));
     }
 
     public IEnumerator HideRoutine() {
@@ -207,6 +217,15 @@ public class PhuneUI : MonoBehaviour, InputListener {
         }
 
         selection = allCells[0];
+        foreach (PhuneCell cell in allCells) {
+            if (cell is PhuneHeaderCell) {
+                PhuneHeaderCell header = (PhuneHeaderCell)cell;
+                if (defaultCat != null && header.text.text == defaultCat.headerName) {
+                    selection = cell;
+                }
+            }
+        }
+
         selection.Populate(true);
         UpdateSelection();
     }
@@ -237,6 +256,9 @@ public class PhuneUI : MonoBehaviour, InputListener {
                 switch (uplink.program) {
                     case PhuneProgramType.ProgramInvertLights:
                         invertLightsPane.SetActive(true);
+                        break;
+                    case PhuneProgramType.ProgramElevator:
+                        elevatorPane.SetActive(true);
                         break;
                 }
             });
@@ -277,7 +299,7 @@ public class PhuneUI : MonoBehaviour, InputListener {
         UpdateSelection();
     }
 
-    private void CollapseEntry() {
+    public void CollapseEntry() {
         if (selection is PhuneHeaderCell) {
             PhuneHeaderCell header = (PhuneHeaderCell)selection;
             header.expanded = true;
