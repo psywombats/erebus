@@ -12,9 +12,9 @@ public class LuaCutsceneContext : LuaContext {
             Global.Instance().Maps.avatar.PauseInput();
         }
         yield return base.RunRoutine(script);
-        if (MapOverlayUI.Instance().textbox.isDisplaying) {
-            yield return MapOverlayUI.Instance().textbox.DisableRoutine();
-        }
+        //if (MapOverlayUI.Instance().textbox.isDisplaying) {
+        //    yield return MapOverlayUI.Instance().textbox.DisableRoutine();
+        //}
         if (Global.Instance().Maps.avatar != null) {
             Global.Instance().Maps.avatar.UnpauseInput();
         }
@@ -30,12 +30,12 @@ public class LuaCutsceneContext : LuaContext {
     }
 
     public override void RunRoutineFromLua(IEnumerator routine) {
-        if (MapOverlayUI.Instance().textbox.isDisplaying) {
-            routine = CoUtils.RunSequence(new IEnumerator[] {
-                MapOverlayUI.Instance().textbox.DisableRoutine(),
-                routine,
-            });
-        }
+        //if (MapOverlayUI.Instance().textbox.isDisplaying) {
+        //    routine = CoUtils.RunSequence(new IEnumerator[] {
+        //        MapOverlayUI.Instance().textbox.DisableRoutine(),
+        //        routine,
+        //    });
+        //}
 
         base.RunRoutineFromLua(routine);
     }

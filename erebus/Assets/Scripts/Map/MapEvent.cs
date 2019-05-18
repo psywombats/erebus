@@ -205,6 +205,7 @@ public abstract class MapEvent : MonoBehaviour {
     }
 
     public void SetLocation(Vector2Int location) {
+        _parent = null;
         position = location;
         SetScreenPositionToMatchTilePosition();
         SetDepth();
