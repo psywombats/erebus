@@ -193,7 +193,7 @@
             float4 desat = float4(avg / 2.0, avg / 2.0, avg / 2.0, c.a);
             o.Albedo = c.rgb * (1.0 - _Desaturation) + desat.rgb * (_Desaturation);
             o.Albedo = o.Albedo * (1.0 - _Flash.a) + _Flash.rgb * _Flash.a;
-            o.Alpha = c.a > 0.5 ? 1.0 : 0.0;
+            o.Alpha = c.a;
             o.Albedo *= o.Alpha;
         }
         

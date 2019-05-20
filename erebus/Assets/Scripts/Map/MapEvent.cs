@@ -270,6 +270,13 @@ public abstract class MapEvent : MonoBehaviour {
         }
     }
 
+    public IEnumerator TryStepRoutine(OrthoDir dir) {
+        Vector2Int target = position + dir.XY3D();
+        if (CanPassAt(target)) {
+            yield return StepRoutine(dir);
+        }
+    }
+
     public IEnumerator StepMultiRoutine(OrthoDir dir, int count) {
         for (int i = 0; i < count; i += 1) {
             yield return StartCoroutine(StepRoutine(dir));

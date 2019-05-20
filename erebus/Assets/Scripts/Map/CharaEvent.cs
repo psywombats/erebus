@@ -19,7 +19,7 @@ public class CharaEvent : MonoBehaviour {
     private const string DefaultMaterial2DPath = "Materials/Sprite2D";
     private const string DefaultMaterial3DPath = "Materials/Sprite3D";
     private const float DesaturationDuration = 0.5f;
-    private const float StepsPerSecond = 4.0f;
+    public const float StepsPerSecond = 4.0f;
     private const float JumpStepsPerSecond = 8.0f;
 
     public GameObject doll;
@@ -36,8 +36,8 @@ public class CharaEvent : MonoBehaviour {
     private bool wasSteppingLastFrame;
     private List<KeyValuePair<float, Vector3>> afterimageHistory;
     private Vector3 targetPx;
-    private float moveTime;
-    private bool stepping;
+    public float moveTime { get; set; }
+    public bool stepping { get; set; }
 
     public MapEvent parent { get { return GetComponent<MapEvent>(); } }
     public Map map { get { return parent.parent; } }

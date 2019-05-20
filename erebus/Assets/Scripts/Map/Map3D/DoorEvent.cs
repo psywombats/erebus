@@ -10,9 +10,14 @@ public class DoorEvent : MonoBehaviour {
     [Space]
     public string mapName;
     public string targetEventName;
+    public bool requiresLightsOff;
 
     public virtual IEnumerator TeleportRoutine(AvatarEvent avatar) {
         if (avatar.GetComponent<CharaEvent>().facing != dir) {
+            yield break;
+        }
+        if (requiresLightsOff && !Global.Instance().IsLightsOutMode()) {
+            Global.Instance().Audio.PlaySFX("locked");
             yield break;
         }
 

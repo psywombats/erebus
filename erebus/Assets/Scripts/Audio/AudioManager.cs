@@ -35,7 +35,7 @@ public class AudioManager : MonoBehaviour, MemoryPopulater {
 
         gameObject.AddComponent<WaveSource>();
 
-        //PlayBGM("debug");
+        PlayBGM("debug");
     }
 
     public void Update() {
