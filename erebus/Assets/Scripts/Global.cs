@@ -3,7 +3,7 @@
 public class Global : MonoBehaviour {
 
     private static Global instance;
-    private static bool destructing;
+    //private static bool destructing;
     
     public InputManager Input { get; private set; }
     public MapManager Maps { get; private set; }
@@ -14,7 +14,7 @@ public class Global : MonoBehaviour {
     private IndexDatabase database;
     public IndexDatabase Database {
         get {
-            if (database == null && !destructing) {
+            if (database == null) {
                 database = IndexDatabase.Instance();
             }
             return database;
@@ -43,7 +43,7 @@ public class Global : MonoBehaviour {
     }
 
     public void OnDestroy() {
-        destructing = true;
+        //destructing = true;
     }
 
     public bool IsLightsOutMode() {

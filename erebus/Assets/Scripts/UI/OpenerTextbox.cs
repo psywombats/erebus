@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using DG.Tweening;
+using UnityEngine.SceneManagement;
 
 public class OpenerTextbox : MonoBehaviour, InputListener {
 
@@ -24,16 +26,31 @@ public class OpenerTextbox : MonoBehaviour, InputListener {
         yield return TypeRoutine("that will never be here, again");
         yield return TypeRoutine("never.");
         yield return TypeRoutine("but instead");
-        yield return TypeRoutine("a 'here' and 'now' can be restored");
-        yield return TypeRoutine("how");
-        yield return TypeRoutine(" is the task at hand, the focus");
-        yield return TypeRoutine("focus");
-        yield return TypeRoutine(" the emotion");
+        yield return TypeRoutine("a 'here' and 'now' that can be restored");
+        yield return TypeRoutine("how?");
+        yield return TypeRoutine("'how' is the task at hand, the focus");
+        yield return TypeRoutine("focus.");
+        yield return TypeRoutine("remove the emotion");
         yield return TypeRoutine("jettison the ego");
-        yield return TypeRoutine(" the self");
+        yield return TypeRoutine("abandon the self");
         yield return TypeRoutine("destroy the conscience");
         yield return TypeRoutine("you are your action and you are your purpose");
-        yield return TypeRoutine("perform your mission");
+        yield return TypeRoutine("perform. your. mission.");
+
+        FadeImageEffect fader = FindObjectOfType<FadeImageEffect>();
+        yield return CoUtils.Wait(0.5f);
+        TransitionData data = Global.Instance().Database.Transitions.GetData(MainMenu.TitleTransitionTag);
+        var tween = GetComponent<CanvasGroup>().DOFade(0.0f, data.GetFadeOut().delay);
+        yield return CoUtils.RunParallel(new IEnumerator[] {
+            CoUtils.RunTween(tween),
+            fader.FadeRoutine(data.GetFadeIn()),
+            Global.Instance().Audio.FadeOutRoutine(data.GetFadeOut().delay),
+        }, Global.Instance());
+        SceneManager.LoadScene("Subway", LoadSceneMode.Single);
+        fader = FindObjectOfType<FadeImageEffect>();
+        yield return fader.FadeRoutine(data.GetFadeOut(), true);
+        yield return CoUtils.Wait(1.0f);
+        yield return FindObjectOfType<PhuneUI>().ShowRoutine();
     }
 
     private IEnumerator TypeRoutine(string text) {

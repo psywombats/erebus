@@ -131,6 +131,7 @@
     <Compile Include="Assets\Scripts\Lua\LuaCutsceneContext.cs" />
     <Compile Include="Assets\Scripts\Lua\LuaMapEvent.cs" />
     <Compile Include="Assets\Scripts\Lua\LuaScript.cs" />
+    <Compile Include="Assets\Scripts\Map\AreaLocator.cs" />
     <Compile Include="Assets\Scripts\Map\CharaEvent.cs" />
     <Compile Include="Assets\Scripts\Map\CornerDir.cs" />
     <Compile Include="Assets\Scripts\Map\DebugMapMarker.cs" />
@@ -171,6 +172,7 @@
     <Compile Include="Assets\Scripts\Phune\Data\PhuneProgramType.cs" />
     <Compile Include="Assets\Scripts\Phune\Data\PhuneTxtData.cs" />
     <Compile Include="Assets\Scripts\Phune\Data\PhuneUplinkData.cs" />
+    <Compile Include="Assets\Scripts\Phune\PhuneCanvasOpener.cs" />
     <Compile Include="Assets\Scripts\Phune\PhuneCell.cs" />
     <Compile Include="Assets\Scripts\Phune\PhuneEntryCell.cs" />
     <Compile Include="Assets\Scripts\Phune\PhuneHeaderCell.cs" />
@@ -189,6 +191,7 @@
     <Compile Include="Assets\Scripts\Serialization\SettingsMemory.cs" />
     <Compile Include="Assets\Scripts\Serialization\SystemMemory.cs" />
     <Compile Include="Assets\Scripts\Tileset.cs" />
+    <Compile Include="Assets\Scripts\UI\MainMenu.cs" />
     <Compile Include="Assets\Scripts\UI\OpenerTextbox.cs" />
     <Compile Include="Assets\Scripts\UI\Textbox.cs" />
     <Compile Include="Assets\Scripts\UI\UISprite.cs" />

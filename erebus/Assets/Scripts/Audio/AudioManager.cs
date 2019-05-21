@@ -34,8 +34,6 @@ public class AudioManager : MonoBehaviour, MemoryPopulater {
         bgmVolumeSetting = Global.Instance().Settings.GetFloatSetting(SettingsConstants.BGMVolume);
 
         gameObject.AddComponent<WaveSource>();
-
-        PlayBGM("debug");
     }
 
     public void Update() {
@@ -59,7 +57,9 @@ public class AudioManager : MonoBehaviour, MemoryPopulater {
                 bgmSource.Stop();
             } else {
                 bgmSource.volume = 1.0f;
-                AudioClip clip = Global.Instance().Database.BGM.GetData(key).track;
+                var db = Global.Instance().Database;
+                BGMData data = db.BGM.GetData(key);
+                AudioClip clip = data.track;
                 bgmSource.clip = clip;
                 bgmSource.Play();
             }

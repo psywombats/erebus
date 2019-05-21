@@ -29,7 +29,7 @@ public class PhuneUI : MonoBehaviour, InputListener {
     public GameObject elevatorPane;
 
     private Vector3 originalPosition;
-    private bool shown = false;
+    public bool shown = false;
     private bool subselectionMode;
 
     private Dictionary<PhuneHeaderCell, List<PhuneEntryCell>> entries;
