@@ -47,11 +47,11 @@ public class Global : MonoBehaviour {
     }
 
     public bool IsLightsOutMode() {
-        return Memory.GetSwitch("lights_out");
+        return true;// Memory.GetSwitch("lights_out");
     }
 
     public bool IsSoundMode() {
-        return Memory.GetSwitch("sound_on");
+        return true;// Memory.GetSwitch("sound_on");
     }
 
     private void InstantiateManagers() {

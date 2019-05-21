@@ -17,6 +17,7 @@ public class SpriteSoundBehavior : SoundEmitterBehavior {
     }
 
     public override void SetIntensity(float f) {
+        f = .5f + f / 2.0f;
         Color c = GetSprite().color;
         GetSprite().color = new Color(c.r, c.g, c.b, f);
     }

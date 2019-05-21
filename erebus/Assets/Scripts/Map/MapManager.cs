@@ -43,7 +43,7 @@ public class MapManager : MonoBehaviour {
         Assert.IsNotNull(activeMap);
         Map newMapInstance = InstantiateMap(mapName);
         MapEvent target = newMapInstance.GetEventNamed(targetEventName);
-.
+        RawTeleport(newMapInstance, target.position);
     }
 
     private void RawTeleport(Map map, Vector2Int location) {
