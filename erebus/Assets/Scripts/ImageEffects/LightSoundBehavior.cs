@@ -4,6 +4,8 @@ using System.Collections;
 [RequireComponent(typeof(Light))]
 public class LightSoundBehavior : SoundEmitterBehavior {
 
+    float lastIntensity;
+
     public override Color GetHue() {
         return GetLight().color;
     }
@@ -17,7 +19,8 @@ public class LightSoundBehavior : SoundEmitterBehavior {
     }
 
     public override void SetIntensity(float f) {
-        GetLight().intensity = f;
+        lastIntensity = f;
+        GetLight().intensity = (f + lastIntensity / 2.0f);
     }
 
     private Light GetLight() {
