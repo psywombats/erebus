@@ -138,6 +138,7 @@
     <Compile Include="Assets\Scripts\Map\Event\CollectibleEvent.cs" />
     <Compile Include="Assets\Scripts\Map\Event\ElevatorEntry.cs" />
     <Compile Include="Assets\Scripts\Map\Event\SecondHeadBehavior.cs" />
+    <Compile Include="Assets\Scripts\Map\Event\TimedDrop.cs" />
     <Compile Include="Assets\Scripts\Map\Event\UplinkEvent.cs" />
     <Compile Include="Assets\Scripts\Map\Event\WanderBehavior.cs" />
     <Compile Include="Assets\Scripts\Map\EventAppearance.cs" />

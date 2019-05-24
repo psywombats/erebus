@@ -171,6 +171,17 @@ public class PhuneUI : MonoBehaviour, InputListener {
         defaultCat = category;
     }
 
+    public void AddDrop(PhuneEntryData data) {
+        Global.Instance().Audio.PlaySFX("txt");
+        if (!shown) {
+            foreach (SlowFlashBehavior flash in tabsToTurnOff) {
+                flash.disable = false;
+            }
+        }
+        dataModel.Insert(0, data);
+        ReloadData();
+    }
+
     public IEnumerator ShowRoutine() {
         ReloadData();
         foreach (SlowFlashBehavior flash in tabsToTurnOff) {
