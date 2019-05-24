@@ -16,6 +16,9 @@ public class DoorEvent : MonoBehaviour {
         if (avatar.GetComponent<CharaEvent>().facing != dir) {
             yield break;
         }
+        if (!GetComponent<MapEvent>().switchEnabled) {
+            yield break;
+        }
         if (requiresLightsOff && !Global.Instance().IsLightsOutMode()) {
             Global.Instance().Audio.PlaySFX("locked");
             yield break;

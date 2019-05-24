@@ -42,6 +42,7 @@ public class MapManager : MonoBehaviour {
     private void RawTeleport(string mapName, string targetEventName) {
         Assert.IsNotNull(activeMap);
         Map newMapInstance = InstantiateMap(mapName);
+        Assert.IsNotNull(newMapInstance, "No new map!!");
         MapEvent target = newMapInstance.GetEventNamed(targetEventName);
         RawTeleport(newMapInstance, target.position);
     }

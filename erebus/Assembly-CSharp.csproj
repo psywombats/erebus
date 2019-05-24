@@ -178,8 +178,12 @@
     <Compile Include="Assets\Scripts\Phune\PhuneHeaderCell.cs" />
     <Compile Include="Assets\Scripts\Phune\PhuneMessageCell.cs" />
     <Compile Include="Assets\Scripts\Phune\PhuneUI.cs" />
-    <Compile Include="Assets\Scripts\Phune\ProgramLift.cs" />
-    <Compile Include="Assets\Scripts\Phune\ProgramLights.cs" />
+    <Compile Include="Assets\Scripts\Phune\Programs\PhuneProgram.cs" />
+    <Compile Include="Assets\Scripts\Phune\Programs\ProgramDoor.cs" />
+    <Compile Include="Assets\Scripts\Phune\Programs\ProgramElevator.cs" />
+    <Compile Include="Assets\Scripts\Phune\Programs\ProgramLift.cs" />
+    <Compile Include="Assets\Scripts\Phune\Programs\ProgramLights.cs" />
+    <Compile Include="Assets\Scripts\Phune\Programs\ProgramSecurity.cs" />
     <Compile Include="Assets\Scripts\Phune\TxtUI.cs" />
     <Compile Include="Assets\Scripts\Serialization\Memory.cs" />
     <Compile Include="Assets\Scripts\Serialization\MemoryManager.cs" />

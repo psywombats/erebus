@@ -1,36 +1,26 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ProgramLights : MonoBehaviour, InputListener {
+public class ProgramLights : PhuneProgram {
 
     private bool toggling;
 
     public GameObject onObject;
     public GameObject offObject;
 
-    public void OnEnable() {
-        Global.Instance().Input.PushListener(this);
+    public override void OnEnable() {
+        base.OnEnable();
         onObject.SetActive(!Global.Instance().IsLightsOutMode());
         offObject.SetActive(Global.Instance().IsLightsOutMode());
     }
 
-    public bool OnCommand(InputManager.Command command, InputManager.Event eventType) {
-        if (eventType != InputManager.Event.Up) {
-            return true;
-        }
+    protected override bool InternalHandleCommand(InputManager.Command command) {
         switch (command) {
             case InputManager.Command.Confirm:
                 if (!toggling) {
                     StartCoroutine(ToggleRoutine());
                 }
                 break;
-            case InputManager.Command.Cancel:
-            case InputManager.Command.Left:
-                FindObjectOfType<PhuneUI>().SelectEntry(true);
-                Global.Instance().Input.RemoveListener(this);
-                break;
-            default:
-                return true;
         }
         return true;
     }

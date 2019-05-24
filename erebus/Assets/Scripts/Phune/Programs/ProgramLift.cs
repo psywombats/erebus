@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class ProgramLift : MonoBehaviour, InputListener {
+public class ProgramLift : PhuneProgram {
     
     public List<GameObject> options;
     public GameObject errorMessage;
@@ -10,8 +10,8 @@ public class ProgramLift : MonoBehaviour, InputListener {
 
     private int selection;
 
-    public void OnEnable() {
-        Global.Instance().Input.PushListener(this);
+    public override void OnEnable() {
+        base.OnEnable();
         selection = 0;
         for (int i = 0; i < options.Count; i += 1) {
             if (Global.Instance().Memory.GetSwitch("lift_" + i)) {
@@ -21,27 +21,17 @@ public class ProgramLift : MonoBehaviour, InputListener {
         MoveSelection(0);
     }
 
-    public bool OnCommand(InputManager.Command command, InputManager.Event eventType) {
-        if (eventType != InputManager.Event.Up) {
-            return true;
-        }
+    protected override bool InternalHandleCommand(InputManager.Command command) {
         switch (command) {
             case InputManager.Command.Confirm:
                 CallLift();
                 break;
-            case InputManager.Command.Cancel:
-            case InputManager.Command.Left:
-                Global.Instance().Input.RemoveListener(this);
-                FindObjectOfType<PhuneUI>().SelectEntry(true);
-                return true;
             case InputManager.Command.Up:
                 MoveSelection(-1);
                 break;
             case InputManager.Command.Down:
                 MoveSelection(1);
                 break;
-            default:
-                return true;
         }
         return true;
     }
@@ -77,6 +67,10 @@ public class ProgramLift : MonoBehaviour, InputListener {
     }
 
     private IEnumerator ElevatorRoutine() {
+        if (working) {
+            yield break;
+        }
+        working = true;
         Global.Instance().Maps.avatar.PauseInput();
         PhuneUI ui = FindObjectOfType<PhuneUI>();
         yield return ui.HideRoutine();
@@ -86,5 +80,6 @@ public class ProgramLift : MonoBehaviour, InputListener {
         yield return CoUtils.Wait(3.5f);
         jitter.enabled = false;
         Global.Instance().Maps.avatar.UnpauseInput();
+        working = false;
     }
 }

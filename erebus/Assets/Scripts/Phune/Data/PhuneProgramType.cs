@@ -2,4 +2,7 @@
 
     ProgramInvertLights,
     ProgramElevator,
+    ProgramSecureCard,
+    ProgramSecurityDoor,
+    ProgramFinaleElevator,
 }
