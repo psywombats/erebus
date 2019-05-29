@@ -11,12 +11,17 @@ public class DoorEvent : MonoBehaviour {
     public string mapName;
     public string targetEventName;
     public bool requiresLightsOff;
+    public bool requiresGlitch;
 
     public virtual IEnumerator TeleportRoutine(AvatarEvent avatar) {
         if (avatar.GetComponent<CharaEvent>().facing != dir) {
             yield break;
         }
         if (!GetComponent<MapEvent>().switchEnabled) {
+            yield break;
+        }
+        if (requiresGlitch && !Global.Instance().Memory.GetSwitch("glitch_on")) {
+            Global.Instance().Audio.PlaySFX("locked");
             yield break;
         }
         if (requiresLightsOff && !Global.Instance().IsLightsOutMode()) {

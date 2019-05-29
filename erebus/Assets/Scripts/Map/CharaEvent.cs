@@ -269,7 +269,8 @@ public class CharaEvent : MonoBehaviour {
         //}
 
         sprites = new Dictionary<string, Sprite>();
-        path = AssetDatabase.GetAssetPath(spritesheet);
+        // path = AssetDatabase.GetAssetPath(spritesheet);
+        path = "Sprites/Charas/" + spritesheet.name;
         if (path.StartsWith("Assets/Resources/")) {
             path = path.Substring("Assets/Resources/".Length);
         }

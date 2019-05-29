@@ -18,12 +18,12 @@ public class LightControlBehavior : MonoBehaviour {
         }
         if (lightsOffOnly != null) {
             foreach (GameObject go in lightsOffOnly) {
-                go.SetActive(lightsOutMode);
+                go.SetActive(lightsOutMode || soundMode);
             }
         }
         if (soundOnly != null) {
             foreach (GameObject go in soundOnly) {
-                go.SetActive(soundMode && lightsOutMode);
+                go.SetActive(soundMode);
             }
         }
     }

@@ -34,6 +34,7 @@ public class ProgramElevator : PhuneProgram {
     private void CallLift() {
         if (selection == 0 && !Global.Instance().Memory.GetSwitch("finale_elevator")) {
             Global.Instance().Memory.SetSwitch("finale_elevator", true);
+            Global.Instance().Memory.SetSwitch("sound_on", true);
             StartCoroutine(ElevatorRoutine());
         }
     }
@@ -59,7 +60,7 @@ public class ProgramElevator : PhuneProgram {
         yield return CoUtils.Wait(0.8f);
         SubJitter jitter = FindObjectOfType<SubJitter>();
         jitter.enabled = true;
-        yield return CoUtils.Wait(8.0f);
+        yield return CoUtils.Wait(5.0f);
         jitter.enabled = false;
         Global.Instance().Maps.avatar.UnpauseInput();
         working = false;

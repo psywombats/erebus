@@ -104,9 +104,37 @@ public class LuaContext : MonoBehaviour {
     }
 
     protected void LoadDefines(string path) {
-        StreamReader reader = new StreamReader(path);
-        lua.DoStream(reader.BaseStream);
-        reader.Close();
+        if (path == DefinesPath) {
+            lua.DoString("function await ()\n" +
+    "    coroutine.yield()\n" +
+    "end\n" +
+    "\n" +
+    "function wait(seconds)\n" +
+    "    cs_wait(seconds)\n" +
+    "    await()\n" +
+    "end\n"
+    );
+        } else {
+            lua.DoString("function teleportCoords(mapName, x, y)\n" +
+"    cs_teleportCoords(mapName, x, y)\n" +
+"    await()\n" +
+"end\n" +
+
+"function teleport(mapName, eventName)\n" +
+"    cs_teleport(mapName, eventName)\n" +
+"    await()\n" +
+"end\n" +
+
+"function fadeOutBGM(seconds)\n" +
+"    cs_fadeOutBGM(seconds)\n" +
+"    await()\n" +
+"end\n" +
+
+"function speak(speaker, line)\n" +
+"    cs_speak(speaker, line)\n" +
+"    await()\n" +
+"end");
+        }
     }
 
     // === LUA CALLABLE ============================================================================

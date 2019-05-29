@@ -5,4 +5,5 @@
     ProgramSecureCard,
     ProgramSecurityDoor,
     ProgramFinaleElevator,
+    ProgramFruit,
 }

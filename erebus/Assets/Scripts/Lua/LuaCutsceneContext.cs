@@ -2,6 +2,7 @@
 using System.Collections;
 using System;
 using MoonSharp.Interpreter;
+using UnityEngine.SceneManagement;
 
 public class LuaCutsceneContext : LuaContext {
 
@@ -51,6 +52,7 @@ public class LuaCutsceneContext : LuaContext {
         lua.Globals["cs_teleport"] = (Action<DynValue, DynValue>)Teleport;
         lua.Globals["cs_fadeOutBGM"] = (Action<DynValue>)FadeOutBGM;
         lua.Globals["cs_speak"] = (Action<DynValue, DynValue>)Speak;
+        lua.Globals["endGame"] = (Action<DynValue>)EndGame;
     }
 
     // === LUA CALLABLE ============================================================================
@@ -62,6 +64,18 @@ public class LuaCutsceneContext : LuaContext {
     //private void Teleport(DynValue mapName, DynValue x, DynValue y) {
     //    RunRoutineFromLua(Global.Instance().Maps.TeleportRoutine(mapName.String, new Vector2Int((int)x.Number, (int)y.Number)));
     //}
+
+    private void EndGame(DynValue _) {
+        Global.Instance().StartCoroutine(EndRoutine());
+        Global.Instance().Maps.avatar.PauseInput();
+    }
+
+    private IEnumerator EndRoutine() {
+        FadeImageEffect fader = FindObjectOfType<FadeImageEffect>();
+        TransitionData data = Global.Instance().Database.Transitions.GetData(MainMenu.TitleTransitionTag);
+        yield return fader.FadeRoutine(data.GetFadeIn());
+        SceneManager.LoadScene("Ender", LoadSceneMode.Single);
+    }
 
     private void Teleport(DynValue mapName, DynValue targetEventName) {
         RunRoutineFromLua(Global.Instance().Maps.TeleportRoutine(mapName.String, targetEventName.String));

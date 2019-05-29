@@ -29,6 +29,6 @@ public class CollectibleEvent : MonoBehaviour {
     }
 
     private string SwitchName() {
-        return program.title + GetComponent<MapEvent3D>().parent.name + "," + GetComponent<MapEvent3D>().position;
+        return program.title;
     }
 }

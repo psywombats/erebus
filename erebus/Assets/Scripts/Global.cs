@@ -51,7 +51,12 @@ public class Global : MonoBehaviour {
     }
 
     public bool IsSoundMode() {
-        return Memory.GetSwitch("sound_on");
+        return (Maps.activeMap != null &&
+            Maps.activeMap.name.Contains("Top")) || Memory.GetSwitch("sound_on");
+    }
+
+    public bool IsGlitchOn() {
+        return Memory.GetSwitch("glitch_on");
     }
 
     private void InstantiateManagers() {

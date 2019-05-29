@@ -182,6 +182,7 @@
     <Compile Include="Assets\Scripts\Phune\Programs\PhuneProgram.cs" />
     <Compile Include="Assets\Scripts\Phune\Programs\ProgramDoor.cs" />
     <Compile Include="Assets\Scripts\Phune\Programs\ProgramElevator.cs" />
+    <Compile Include="Assets\Scripts\Phune\Programs\ProgramFruit.cs" />
     <Compile Include="Assets\Scripts\Phune\Programs\ProgramLift.cs" />
     <Compile Include="Assets\Scripts\Phune\Programs\ProgramLights.cs" />
     <Compile Include="Assets\Scripts\Phune\Programs\ProgramSecurity.cs" />
@@ -196,6 +197,8 @@
     <Compile Include="Assets\Scripts\Serialization\SettingsMemory.cs" />
     <Compile Include="Assets\Scripts\Serialization\SystemMemory.cs" />
     <Compile Include="Assets\Scripts\Tileset.cs" />
+    <Compile Include="Assets\Scripts\UI\CloserTextbox.cs" />
+    <Compile Include="Assets\Scripts\UI\Countdowner.cs" />
     <Compile Include="Assets\Scripts\UI\MainMenu.cs" />
     <Compile Include="Assets\Scripts\UI\OpenerTextbox.cs" />
     <Compile Include="Assets\Scripts\UI\Textbox.cs" />
