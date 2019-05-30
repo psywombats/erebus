@@ -18,7 +18,7 @@ public class AreaLocator : MonoBehaviour {
                 Global.Instance().Audio.PlayBGM(bgm);
             }
             currentAreaName = areaName;
-            if (currentBgmName != null && currentBgmName.Length > 0) {
+            if (bgm != null && bgm.Length > 0) {
                 currentBgmName = bgmName;
                 currentBgmComposer = bgmComposer;
             }

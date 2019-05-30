@@ -31,6 +31,7 @@ public class PhuneUI : MonoBehaviour, InputListener {
     public GameObject lockedDoorPane;
     public GameObject elevatorFinalePane;
     public GameObject elevatorFruitPane;
+    public GameObject infoPane;
 
     private Vector3 originalPosition;
     public bool shown = false;
@@ -156,6 +157,7 @@ public class PhuneUI : MonoBehaviour, InputListener {
                 securityPane.SetActive(false);
                 elevatorFinalePane.SetActive(false);
                 elevatorFruitPane.SetActive(false);
+                infoPane.SetActive(false);
             }
         }));
     }
@@ -290,6 +292,9 @@ public class PhuneUI : MonoBehaviour, InputListener {
                         break;
                     case PhuneProgramType.ProgramFruit:
                         elevatorFruitPane.SetActive(true);
+                        break;
+                    case PhuneProgramType.ProgramInfo:
+                        infoPane.SetActive(true);
                         break;
                 }
             });

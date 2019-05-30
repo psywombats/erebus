@@ -68,6 +68,7 @@ public class LuaCutsceneContext : LuaContext {
     private void EndGame(DynValue _) {
         Global.Instance().StartCoroutine(EndRoutine());
         Global.Instance().Maps.avatar.PauseInput();
+        Destroy(FindObjectOfType<PhuneUI>());
     }
 
     private IEnumerator EndRoutine() {

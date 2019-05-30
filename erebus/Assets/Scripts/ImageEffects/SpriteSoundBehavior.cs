@@ -4,6 +4,8 @@ using System.Collections;
 [RequireComponent(typeof(SpriteRenderer))]
 public class SpriteSoundBehavior : SoundEmitterBehavior {
 
+    public bool useOldHard = false;
+
     public override Color GetHue() {
         return GetSprite().color;
     }
@@ -17,9 +19,9 @@ public class SpriteSoundBehavior : SoundEmitterBehavior {
     }
 
     public override void SetIntensity(float f) {
-        f = .5f + f / 2.0f;
+        float f2 = .5f + f / 2.0f;
         Color c = GetSprite().color;
-        GetSprite().color = new Color(c.r, c.g, c.b, f);
+        GetSprite().color = new Color(c.r, c.g, c.b, useOldHard ? f : f2);
     }
 
     private SpriteRenderer GetSprite() {

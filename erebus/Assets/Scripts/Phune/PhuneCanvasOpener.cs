@@ -10,7 +10,10 @@ public class PhuneCanvasOpener : MonoBehaviour {
 
     void Start() {
         StartCoroutine(CoUtils.RunAfterDelay(1.0f, () => {
-            on = true;
+            StartCoroutine(FindObjectOfType<PhuneUI>().ShowRoutine());
+            StartCoroutine(CoUtils.RunAfterDelay(1.0f, () => {
+                on = true;
+            }));
         }));
     }
 

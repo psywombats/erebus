@@ -102,4 +102,8 @@ public class WaveSource : MonoBehaviour {
         if (bands == null) return 0.0f;
         return bands[6] / 1.5f;
     }
+
+    public float GetBand(int i) {
+        return bands[i];
+    }
 }

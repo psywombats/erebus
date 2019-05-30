@@ -29,6 +29,8 @@ public class DoorEvent : MonoBehaviour {
             yield break;
         }
 
+        Global.Instance().Audio.PlaySFX("door");
+
         avatar.PauseInput();
         while (avatar.GetComponent<MapEvent>().tracking) {
             yield return null;

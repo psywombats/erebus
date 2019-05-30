@@ -54,6 +54,7 @@ public class ProgramElevator : PhuneProgram {
             yield break;
         }
         working = true;
+        Global.Instance().Audio.PlaySFX("elevator");
         Global.Instance().Maps.avatar.PauseInput();
         PhuneUI ui = FindObjectOfType<PhuneUI>();
         yield return ui.HideRoutine();

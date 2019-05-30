@@ -38,7 +38,7 @@ public class OpenerTextbox : MonoBehaviour, InputListener {
         yield return TypeRoutine("perform. your. mission.");
 
         FadeImageEffect fader = FindObjectOfType<FadeImageEffect>();
-        yield return CoUtils.Wait(0.5f);
+        yield return CoUtils.Wait(1.5f);
         TransitionData data = Global.Instance().Database.Transitions.GetData(MainMenu.TitleTransitionTag);
         var tween = GetComponent<CanvasGroup>().DOFade(0.0f, data.GetFadeOut().delay);
         yield return CoUtils.RunParallel(new IEnumerator[] {

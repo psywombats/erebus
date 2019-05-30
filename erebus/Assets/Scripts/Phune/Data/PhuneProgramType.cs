@@ -6,4 +6,5 @@
     ProgramSecurityDoor,
     ProgramFinaleElevator,
     ProgramFruit,
+    ProgramInfo,
 }

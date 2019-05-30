@@ -47,6 +47,7 @@ public class ProgramLift : PhuneProgram {
                 for (int i = 0; i < options.Count; i += 1) {
                     mem.SetSwitch("lift_" + i, i == selection);
                 }
+                Global.Instance().Audio.PlaySFX("lightswitch");
                 if (Global.Instance().Maps.avatar.GetComponent<MapEvent>().parent.name == "ElevatorRide") {
                     StartCoroutine(ElevatorRoutine());
                 }
@@ -71,6 +72,7 @@ public class ProgramLift : PhuneProgram {
             yield break;
         }
         working = true;
+        Global.Instance().Audio.PlaySFX("elevator");
         Global.Instance().Maps.avatar.PauseInput();
         PhuneUI ui = FindObjectOfType<PhuneUI>();
         yield return ui.HideRoutine();
