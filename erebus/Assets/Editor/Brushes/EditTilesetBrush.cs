@@ -4,7 +4,7 @@ using UnityEngine;
 namespace UnityEditor {
 
     [CustomGridBrush(true, false, false, "Edit Tileset Brush")]
-    public class EditTilesetBrush : GridBrush {
+    public class EditTilesetBrush : UnityEditor.Tilemaps.GridBrush {
 
         public override void Paint(GridLayout grid, GameObject brushTarget, Vector3Int position) {
             base.Paint(grid, brushTarget, position);
@@ -30,7 +30,7 @@ namespace UnityEditor {
     }
 
     [CustomEditor(typeof(EditTilesetBrush))]
-    public class EditTilesetBrushEditor : GridBrushEditorBase {
+    public class EditTilesetBrushEditor : UnityEditor.Tilemaps.GridBrushEditorBase {
         public override GameObject[] validTargets {
             get {
                 return FindObjectsOfType<TilesetOverlay>().Select(x => x.overlay.gameObject).ToArray();
